@@ -1,0 +1,1056 @@
+﻿<!DOCTYPE html>
+
+<!-- Created with Ai->Canvas Export Plug-In Version 1.3 (PC/64) for Adobe Illustrator -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)             -->
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>CJP Website Launch Event Coundown</title>
+        <link href="css/countdown.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <script src="js/ntp.js" async defer></script>
+        <script>                            
+            var canvas;
+            var ctx;
+            var firstRun = 1; // This shouldn't be necessary
+            // Responsive UA (Relative changes)
+            var resizeTimer;
+
+            var deltaWidthTranslationScaleRatio = 1.0;
+            var deltaHeightTranslationScaleRatio = 1.0;
+            var prevDeltaWidthTranslationScaleRatio = 0.0;
+            var prevDeltaHeightTranslationScaleRatio = 0.0;
+            var originalCanvasWidth = 0;
+            var originalCanvasHeight = 0;
+
+            var stage1_event = new Date("September 26, 2018 20:00:00");
+            var clockDisplayFunctions = [clockdigitzero1, clockdigitone1, clockdigittwo1, clockdigitthree1, clockdigitfour1, clockdigitfive1, clockdigitsix1, clockdigitseven1, clockdigiteight1, clockdigitnine1];
+
+            var numberOfClockDigits = 8;
+            var numberOfClockNumbers = 10;
+            var sortedClockNumberImages = new Array(10);
+            var clockDisplayNames = ["clockDisplayDaysDigit1", "clockDisplayDaysDigit2", "clockDisplayHoursDigit1", "clockDisplayHoursDigit1",
+                "clockDisplayMinutesDigit1", "clockDisplayMinutesDigit1", "clockDisplaySecondsDigit1", "clockDisplaySecondsDigit1"];
+            var clockNumberNames = ["numberZero", "numberOne", "numberTwo", "numberThree", "numberFour", "numberFive", "numberSix", "numberSeven", "numberEight", "numberNine"];
+            //var staticItemsOriginalCenterLocationLength = 15;
+            //var staticItemsOriginalCenterLocation = {
+            //    'callumpose1': { 'x': 559.4, 'y': 563.5 }, 'clockFramework': { 'x': 450.6, 'y': 833.3 }, 'clockTitleSeconds': { 'x': 623.8, 'y': 827.7 }, 'clockTitleMinutes': { 'x': 498.3, 'y': 827.7 },
+            //    'clockTitleHours': { 'x': 378.3, 'y': 827.7 }, 'clockTitleDays': { 'x': 263.8, 'y': 827.7 }, 'clockDisplayDaysDigit1': { 'x': 245, 'y': 815 }, 'clockDisplayDaysDigit2': { 'x': 280, 'y': 815 },
+            //    'clockDisplayHoursDigit1': { 'x': 355, 'y': 815 }, 'clockDisplayHoursDigit2': { 'x': 403, 'y': 815 }, 'clockDisplayMinutesDigit1': { 'x': 477, 'y': 815 },
+            //    'clockDisplayMinutesDigit2': { 'x': 524, 'y': 815 }, 'clockDisplaySecondsDigit1': { 'x': 605, 'y': 815 }, 'clockDisplaySecondsDigit2': { 'x': 645, 'y': 815 },
+            //    'cJPEventTitle': { 'x': 558.1, 'y': 159.0 }, 'cJPFooter': { 'x': 18.0, 'y': 952.9 }
+            //};
+            var staticItemsOriginalCenterLocation = {
+                'callumpose1': { 'x': 397.4, 'y': 563.5 }, 'clockFramework': { 'x': 288.6, 'y': 833.3 }, 'clockTitleSeconds': { 'x': 461.8, 'y': 827.7 }, 'clockTitleMinutes': { 'x': 336.3, 'y': 827.7 },
+                'clockTitleHours': { 'x': 216.3, 'y': 827.7 }, 'clockTitleDays': { 'x': 101.8, 'y': 827.7 }, 'clockDisplayDaysDigit1': { 'x': 83, 'y': 815 }, 'clockDisplayDaysDigit2': { 'x': 118, 'y': 815 },
+                'clockDisplayHoursDigit1': { 'x': 193, 'y': 815 }, 'clockDisplayHoursDigit2': { 'x': 241, 'y': 815 }, 'clockDisplayMinutesDigit1': { 'x': 315, 'y': 815 },
+                'clockDisplayMinutesDigit2': { 'x': 362, 'y': 815 }, 'clockDisplaySecondsDigit1': { 'x': 443, 'y': 815 }, 'clockDisplaySecondsDigit2': { 'x': 483, 'y': 815 },
+                'cJPEventTitle': { 'x': 365.2, 'y': 159.0 }, 'cJPFooter': { 'x': 128.6, 'y': 952.9 }
+            };
+            //var staticItemsCenterLocation = {
+            //  'callumpose1': { 'x': 559.4, 'y': 563.5 }, 'clockFramework': { 'x': 450.6, 'y': 833.3 }, 'clockTitleSeconds': { 'x': 623.8, 'y': 827.7 }, 'clockTitleMinutes': { 'x': 498.3, 'y': 827.7 },
+            //  'clockTitleHours': { 'x': 378.3, 'y': 827.7 }, 'clockTitleDays': { 'x': 263.8, 'y': 827.7 }, 'clockDisplayDaysDigit1': { 'x': 245, 'y': 815 }, 'clockDisplayDaysDigit2': { 'x': 280, 'y': 815 },
+            //  'clockDisplayHoursDigit1': { 'x': 355, 'y': 815 }, 'clockDisplayHoursDigit2': { 'x': 403, 'y': 815 }, 'clockDisplayMinutesDigit1': { 'x': 477, 'y': 815 },
+            //  'clockDisplayMinutesDigit2': { 'x': 524, 'y': 815 }, 'clockDisplaySecondsDigit1': { 'x': 605, 'y': 815 }, 'clockDisplaySecondsDigit2': { 'x': 645, 'y': 815 },
+            //  'cJPEventTitle': { 'x': 558.1, 'y': 159.0 }, 'cJPFooter': { 'x': 18.0, 'y': 952.9 }
+            //};
+            var staticItemsCenterLocation = {
+                'callumpose1': { 'x': 397.4, 'y': 563.5 }, 'clockFramework': { 'x': 288.6, 'y': 833.3 }, 'clockTitleSeconds': { 'x': 461.8, 'y': 827.7 }, 'clockTitleMinutes': { 'x': 336.3, 'y': 827.7 },
+                'clockTitleHours': { 'x': 216.3, 'y': 827.7 }, 'clockTitleDays': { 'x': 101.8, 'y': 827.7 }, 'clockDisplayDaysDigit1': { 'x': 83, 'y': 815 }, 'clockDisplayDaysDigit2': { 'x': 118, 'y': 815 },
+                'clockDisplayHoursDigit1': { 'x': 193, 'y': 815 }, 'clockDisplayHoursDigit2': { 'x': 241, 'y': 815 }, 'clockDisplayMinutesDigit1': { 'x': 315, 'y': 815 },
+                'clockDisplayMinutesDigit2': { 'x': 362, 'y': 815 }, 'clockDisplaySecondsDigit1': { 'x': 443, 'y': 815 }, 'clockDisplaySecondsDigit2': { 'x': 483, 'y': 815 },
+                'cJPEventTitle': { 'x': 365.2, 'y': 159.0 }, 'cJPFooter': { 'x': 128.6, 'y': 952.9 }
+            };
+            //var staticItemsCenterOffsetLength = 25;            
+            var staticItemsCenterOffset = {
+                'callumpose1': { 'x': 0.0, 'y': 0.0 }, 'clockFramework': { 'x': 0.0, 'y': 0.0}, 'clockTitleSeconds': { 'x': 0.0, 'y': 0.0 }, 'clockTitleMinutes': { 'x': 0.0, 'y': 0.0 },
+                'clockTitleHours': { 'x': 0.0, 'y': 0.0 }, 'clockTitleDays': { 'x': 0.0, 'y': 0.0 }, 'clockDisplayDaysDigit1': { 'x': 0.0, 'y': 0.0 }, 'clockDisplayDaysDigit2': { 'x': 0.0, 'y': 0.0 },
+                'clockDisplayHoursDigit1': { 'x': 0.0, 'y': 0.0 }, 'clockDisplayHoursDigit2': { 'x': 0.0, 'y': 0.0 }, 'clockDisplayMinutesDigit1': { 'x': 0.0, 'y': 0.0 },
+                'clockDisplayMinutesDigit2': { 'x': 0.0, 'y': 0.0 }, 'clockDisplaySecondsDigit1': { 'x': 0.0, 'y': 0.0 }, 'clockDisplaySecondsDigit2': { 'x': 0.0, 'y': 0.0 },
+                'cJPEventTitle': { 'x': 0.0, 'y': 0.0 }, 'cJPFooter': { 'x': 0.0, 'y': 0.0 },
+                'numberZero': { 'x': 0.0, 'y': 0.0 }, 'numberOne': { 'x': 0.0, 'y': 0.0 }, 'numberTwo': { 'x': 0.0, 'y': 0.0 }, 'numberThree': { 'x': 0.0, 'y': 0.0 },
+                'numberFour': { 'x': 0.0, 'y': 0.0 }, 'numberFive': { 'x': 0.0, 'y': 0.0 }, 'numberSix': { 'x': 0.0, 'y': 0.0 },
+                'numberSeven': { 'x': 0.0, 'y': 0.0 }, 'numberEight': { 'x': 0.0, 'y': 0.0 }, 'numberNine': { 'x': 0.0, 'y': 0.0 }
+            };
+            var staticItemsSize = {
+                'callumpose1': { 'width': 0.0, 'height': 0.0 }, 'clockFramework': { 'width': 0.0, 'height': 0.0}, 'clockTitleSeconds': { 'width': 0.0, 'height': 0.0 }, 'clockTitleMinutes': { 'width': 0.0, 'height': 0.0 },
+                'clockTitleHours': { 'width': 0.0, 'height': 0.0 }, 'clockTitleDays': { 'width': 0.0, 'y': 0.0 }, 'clockDisplayDaysDigit1': { 'width': 0.0, 'height': 0.0 }, 'clockDisplayDaysDigit2': { 'width': 0.0, 'height': 0.0 },
+                'clockDisplayHoursDigit1': { 'width': 0.0, 'height': 0.0 }, 'clockDisplayHoursDigit2': { 'width': 0.0, 'height': 0.0 }, 'clockDisplayMinutesDigit1': { 'width': 0.0, 'height': 0.0 },
+                'clockDisplayMinutesDigit2': { 'width': 0.0, 'height': 0.0 }, 'clockDisplaySecondsDigit1': { 'width': 0.0, 'height': 0.0 }, 'clockDisplaySecondsDigit2': { 'width': 0.0, 'height': 0.0 },
+                'cJPEventTitle': { 'width': 0.0, 'height': 0.0 }, 'cJPFooter': { 'x': 0.0, 'y': 0.0 },
+                'numberZero': { 'x': 0.0, 'y': 0.0 }, 'numberOne': { 'x': 0.0, 'y': 0.0 }, 'numberTwo': { 'x': 0.0, 'y': 0.0 }, 'numberThree': { 'x': 0.0, 'y': 0.0 },
+                'numberFour': { 'x': 0.0, 'y': 0.0 }, 'numberFive': { 'x': 0.0, 'y': 0.0 }, 'numberSix': { 'x': 0.0, 'y': 0.0 },
+                'numberSeven': { 'x': 0.0, 'y': 0.0 }, 'numberEight': { 'x': 0.0, 'y': 0.0 }, 'numberNine': { 'x': 0.0, 'y': 0.0 }
+            };
+
+            if (!String.prototype.includes) {
+                String.prototype.includes = function (search, start) {
+                    if (typeof start !== 'number') {
+                        start = 0;
+                    }
+
+                    if (start + search.length > this.length) {
+                        return false;
+                    } else {
+                        return this.indexOf(search, start) !== -1;
+                    }
+                };
+            }
+
+            //NTP.js is smart and sets cookie if current time is already synched(or close enough to synched), to an NTP server.
+            function init() {
+                canvas = document.getElementById("canvas");
+                ctx = canvas.getContext("2d");   
+                originalCanvasWidth = canvas.width;
+                originalCanvasHeight = canvas.height;
+                initialise();
+                updateClock();
+                var timeinterval = setInterval(updateClock, 1000);
+            }
+
+            function initialise() {
+                //for (_i = 0; _i < staticItemsCenterOffset.length; _i++) { //Get all element IDs with "image" in their ID name.
+                // Initial Image Sizes
+                staticItemsSize.callumpose1.width = document.getElementById("image_CallumPose1").width;
+                staticItemsSize.callumpose1.height = document.getElementById("image_CallumPose1").height;
+                staticItemsSize.clockFramework.width = document.getElementById("image_ClockFramework").width;
+                staticItemsSize.clockFramework.height = document.getElementById("image_ClockFramework").height;
+                staticItemsSize.clockTitleSeconds.width = document.getElementById("image_ClockTitleSeconds").width;
+                staticItemsSize.clockTitleSeconds.height = document.getElementById("image_ClockTitleSeconds").height;
+                staticItemsSize.clockTitleMinutes.width = document.getElementById("image_ClockTitleMinutes").width;
+                staticItemsSize.clockTitleMinutes.height = document.getElementById("image_ClockTitleMinutes").height;
+                staticItemsSize.clockTitleHours.width = document.getElementById("image_ClockTitleHours").width;
+                staticItemsSize.clockTitleHours.height = document.getElementById("image_ClockTitleHours").height;
+                staticItemsSize.clockTitleDays.width = document.getElementById("image_ClockTitleDays").width;
+                staticItemsSize.clockTitleDays.height = document.getElementById("image_ClockTitleDays").height;
+                // Initialise to display all zeros
+                staticItemsSize.clockDisplayDaysDigit1.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplayDaysDigit1.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplayDaysDigit2.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplayDaysDigit2.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplayHoursDigit1.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplayHoursDigit1.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplayHoursDigit2.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplayHoursDigit2.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplayMinutesDigit1.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplayMinutesDigit1.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplayMinutesDigit2.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplayMinutesDigit2.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplaySecondsDigit1.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplaySecondsDigit1.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.clockDisplaySecondsDigit2.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.clockDisplaySecondsDigit2.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.cJPEventTitle.width = document.getElementById("image_CJPEventTitle").width;
+                staticItemsSize.cJPEventTitle.height = document.getElementById("image_CJPEventTitle").height;
+                staticItemsSize.cJPEventTitle.width = document.getElementById("image_CJPFooter").width;
+                staticItemsSize.cJPEventTitle.height = document.getElementById("image_CJPFooter").height;
+                staticItemsSize.numberZero.width = document.getElementById("image_ClockDigitZero1").width;
+                staticItemsSize.numberZero.height = document.getElementById("image_ClockDigitZero1").height;
+                staticItemsSize.numberOne.width = document.getElementById("image_ClockDigitOne1").width;
+                staticItemsSize.numberOne.height = document.getElementById("image_ClockDigitOne1").height;
+                staticItemsSize.numberTwo.width = document.getElementById("image_ClockDigitTwo1").width;
+                staticItemsSize.numberTwo.height = document.getElementById("image_ClockDigitTwo1").height;
+                staticItemsSize.numberThree.width = document.getElementById("image_ClockDigitThree1").width;
+                staticItemsSize.numberThree.height = document.getElementById("image_ClockDigitThree1").height;
+                staticItemsSize.numberFour.width = document.getElementById("image_ClockDigitFour1").width;
+                staticItemsSize.numberFour.height = document.getElementById("image_ClockDigitFour1").height;
+                staticItemsSize.numberFive.width = document.getElementById("image_ClockDigitFive1").width;
+                staticItemsSize.numberFive.height = document.getElementById("image_ClockDigitFive1").height;
+                staticItemsSize.numberSix.width = document.getElementById("image_ClockDigitSix1").width;
+                staticItemsSize.numberSix.height = document.getElementById("image_ClockDigitSix1").height;
+                staticItemsSize.numberSeven.width = document.getElementById("image_ClockDigitSeven1").width;
+                staticItemsSize.numberSeven.height = document.getElementById("image_ClockDigitSeven1").height;
+                staticItemsSize.numberEight.width = document.getElementById("image_ClockDigitEight1").width;
+                staticItemsSize.numberEight.height = document.getElementById("image_ClockDigitEight1").height;
+                staticItemsSize.numberNine.width = document.getElementById("image_ClockDigitNine1").width;
+                staticItemsSize.numberNine.height = document.getElementById("image_ClockDigitNine1").height;
+
+                // Initial Center Offset Positions
+                staticItemsCenterOffset.callumpose1.width = -(document.getElementById("image_CallumPose1").width / 2);
+                staticItemsCenterOffset.callumpose1.height = -(document.getElementById("image_CallumPose1").height / 2);
+                staticItemsCenterOffset.clockFramework.width = -(document.getElementById("image_ClockFramework").width / 2);
+                staticItemsCenterOffset.clockFramework.height = -(document.getElementById("image_ClockFramework").height / 2);
+                staticItemsCenterOffset.clockTitleSeconds.width = -(document.getElementById("image_ClockTitleSeconds").width / 2);
+                staticItemsCenterOffset.clockTitleSeconds.height = -(document.getElementById("image_ClockTitleSeconds").height / 2);
+                staticItemsCenterOffset.clockTitleMinutes.width = -(document.getElementById("image_ClockTitleMinutes").width / 2);
+                staticItemsCenterOffset.clockTitleMinutes.height = -(document.getElementById("image_ClockTitleMinutes").height / 2);
+                staticItemsCenterOffset.clockTitleHours.width = -(document.getElementById("image_ClockTitleHours").width / 2);
+                staticItemsCenterOffset.clockTitleHours.height = -(document.getElementById("image_ClockTitleHours").height / 2);
+                staticItemsCenterOffset.clockTitleDays.width = -(document.getElementById("image_ClockTitleDays").width / 2);
+                staticItemsCenterOffset.clockTitleDays.height = -(document.getElementById("image_ClockTitleDays").height / 2);
+                // Initialise to display all zeros
+                staticItemsCenterOffset.clockDisplayDaysDigit1.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplayDaysDigit1.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplayDaysDigit2.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplayDaysDigit2.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplayHoursDigit1.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplayHoursDigit1.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplayHoursDigit2.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplayHoursDigit2.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplayMinutesDigit1.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplayMinutesDigit1.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplayMinutesDigit2.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplayMinutesDigit2.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplaySecondsDigit1.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplaySecondsDigit1.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.clockDisplaySecondsDigit2.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.clockDisplaySecondsDigit2.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.cJPEventTitle.width = -(document.getElementById("image_CJPEventTitle").width / 2);
+                staticItemsCenterOffset.cJPEventTitle.height = -(document.getElementById("image_CJPEventTitle").height / 2);
+                staticItemsCenterOffset.cJPEventTitle.width = -(document.getElementById("image_CJPFooter").width / 2);
+                staticItemsCenterOffset.cJPEventTitle.height = -(document.getElementById("image_CJPFooter").height / 2);
+                staticItemsCenterOffset.numberZero.width = -(document.getElementById("image_ClockDigitZero1").width / 2);
+                staticItemsCenterOffset.numberZero.height = -(document.getElementById("image_ClockDigitZero1").height / 2);
+                staticItemsCenterOffset.numberOne.width = -(document.getElementById("image_ClockDigitOne1").width / 2);
+                staticItemsCenterOffset.numberOne.height = -(document.getElementById("image_ClockDigitOne1").height / 2);
+                staticItemsCenterOffset.numberTwo.width = -(document.getElementById("image_ClockDigitTwo1").width / 2);
+                staticItemsCenterOffset.numberTwo.height = -(document.getElementById("image_ClockDigitTwo1").height / 2);
+                staticItemsCenterOffset.numberThree.width = -(document.getElementById("image_ClockDigitThree1").width / 2);
+                staticItemsCenterOffset.numberThree.height = -(document.getElementById("image_ClockDigitThree1").height / 2);
+                staticItemsCenterOffset.numberFour.width = -(document.getElementById("image_ClockDigitFour1").width / 2);
+                staticItemsCenterOffset.numberFour.height = -(document.getElementById("image_ClockDigitFour1").height / 2);
+                staticItemsCenterOffset.numberFive.width = -(document.getElementById("image_ClockDigitFive1").width / 2);
+                staticItemsCenterOffset.numberFive.height = -(document.getElementById("image_ClockDigitFive1").height / 2);
+                staticItemsCenterOffset.numberSix.width = -(document.getElementById("image_ClockDigitSix1").width / 2);
+                staticItemsCenterOffset.numberSix.height = -(document.getElementById("image_ClockDigitSix1").height / 2);
+                staticItemsCenterOffset.numberSeven.width = -(document.getElementById("image_ClockDigitSeven1").width / 2);
+                staticItemsCenterOffset.numberSeven.height = -(document.getElementById("image_ClockDigitSeven1").height / 2);
+                staticItemsCenterOffset.numberEight.width = -(document.getElementById("image_ClockDigitEight1").width / 2);
+                staticItemsCenterOffset.numberEight.height = -(document.getElementById("image_ClockDigitEight1").height / 2);
+                staticItemsCenterOffset.numberNine.width = -(document.getElementById("image_ClockDigitNine1").width / 2);
+                staticItemsCenterOffset.numberNine.height = -(document.getElementById("image_ClockDigitNine1").height / 2);
+
+                // Get all index locations of all clock numbers in DOM's images collection and sort from 0 to 9
+                //var images = document.getElementsByTagName('img');
+                var images = document.images;
+               // var testString = images[0].src;
+               // var testResult = testString.includes("ClockDigitZero1");
+
+                for (_i = 0; _i < images.length; _i++) {
+                    if ((images[_i].id).includes("ClockDigitZero1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[0] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitOne1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[1] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitTwo1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[2] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitThree1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[3] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitFour1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[4] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitFive1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[5] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitSix1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[6] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitSeven1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[7] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitEight1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[8] = images[_i];
+                    } 
+                    if ((images[_i].id).includes("ClockDigitNine1")) { //TODO: Rename <img> ID's for clock numbers to use this method 
+                        sortedClockNumberImages[9] = images[_i];
+                    }                     
+                }
+
+                //}
+                // Register an event listener to
+                // call the resizeCanvas() function each time 
+                // the window is resized.
+                window.addEventListener('resize', resizeCanvas, false);
+                // Draw canvas border for the first time.
+                resizeCanvas();
+            }
+
+            function updateAllClockDigitsAndNumbers() {
+
+                //Update center locations and offsets and sizes for all clock digits
+                //var CDSIOCLStarIndex = 6; //clockDigitsStaticItemsOriginalCenterLocationStartIndex
+                for (_i = 0; _i < numberOfClockDigits; _i++) {
+                    onInitialisationSetTransition(staticItemsOriginalCenterLocation[clockDisplayNames[_i]], staticItemsCenterLocation[clockDisplayNames[_i]]);
+                }
+
+                // Get all index locations of all clock numbers in DOM's images collection and sort from 0 to 9
+                //var images = document.getElementsByTagName('img');
+                //var images = document.images;
+                //var sortedClockNumberImages = new Array(numberOfClockNumbers);
+                // CHECK: Are <img>s in the document images collection in the same as order as they appear in the <body> definition? 
+                //for (_i = 0; _i < images.length; _i++) {
+                //    if ((images[_i].src).includes("ClockDigit" + _i.toString()); //TODO: Rename <img> ID's for clock numbers to use this method 
+                //}
+
+                //Update center locations and offsets and sizes for all clock numbers
+                //var CNSICOFSStarIndex = 15; //clockNumbersStaticItemsCenterOffsetAndSizeStartIndex
+                for (_i = 0; _i < numberOfClockNumbers; _i++) {
+                    onInitialisationSetOffsetAndSize(sortedClockNumberImages[_i], staticItemsCenterOffset[clockNumberNames[_i]], staticItemsSize[clockNumberNames[_i]]);
+                }
+            }
+
+            // Runs each time the DOM window resize event fires.
+            // Resets the canvas dimensions to match window,
+            // then redraws the canvas.
+            //function onResize() {
+            //    // Resize DOM events are fired multiple times for various reasons, where the window dimensions can fluctuate between events. 
+            //    // (It can be shown that the resize function is called at least once for each change in each device width dimension.)
+            //    // Hence an attempt is made to only resize the canvas once the final window size dimensions are stable. This philosophy reduces the load 
+            //    // on the canvas resize functions. To little delay has no effect and to much delay results on laggy U.I. experience. Sometimes it does not matter how long the delay is 
+            //    // there are still multiple calls to resizeCanvas-this may be able to be nullified by clearing DOM resize event some other way.
+
+            //    clearTimeout(resizeTimer);
+
+            //    resizeTimer = setTimeout(resizeCanvas, 200); // 500ms delay
+                 
+            //}
+
+            function resizeCanvas() {
+                // Calculate canvas resize coefficients from Ai's [design] canavs size and current UA dimensions and orientation.
+                // NOTES: The position and size of static canvas elements and the animation properties of dynamic canvas elements, depend on the
+                //          initial design values as used in Adobe Illustrator(Ai) and on the current user agent(UA).
+                // Relative update            
+                
+                //deltaWidthTranslationRatio = window.innerWidth / canvas.width;
+                //deltaHeightTranslationRatio = window.innerHeight / canvas.height;
+                //var borderWidth = 16;
+                //var borderHeight = 16;
+                ////var borderHeight = window.outerHeight - window.innerHeight;
+                //var cStyle = document.body.currentStyle || window.getComputedStyle(document.body, "");
+
+                //// Check the overflow and overflowY properties for "auto" and "visible" values
+                //var hasVScroll = document.body.scrollHeight > document.body.clientHeight;
+                //hasVScroll = cStyle.overflow == "visible"
+                //    || cStyle.overflowY == "visible"
+                //    || (hasVScroll && cStyle.overflow == "auto")
+                //    || (hasVScroll && cStyle.overflowY == "auto");
+                //var hasHScroll = cStyle.overflow == "visible"
+                //    || cStyle.overflowY == "visible"
+                //    || (hasHScroll && cStyle.overflow == "auto")
+                //    || (hasHScroll && cStyle.overflowY == "auto");
+                //if (!hasVScroll) {
+                //    borderWidth = 0;
+                //}
+                //if (!hasHScroll) {
+                //    borderHeight = 0;
+                //}
+                var borderWidth = 8;
+                var borderHeight = 20;
+                var docDocEleClientWidth = document.documentElement.clientWidth;
+                var docDocEleClientHeight = document.documentElement.clientHeight;
+                var docDocEleScrollWidth = document.documentElement.scrollWidth;
+                var docDocEleScrollHeight = document.documentElement.scrollHeight;
+
+                borderWidth = docDocEleScrollWidth - docDocEleClientWidth;
+                borderHeight = docDocEleScrollHeight - docDocEleClientHeight;
+
+                //deltaWidthTranslationScaleRatio = (window.innerWidth - borderWidth) / originalCanvasWidth;
+                //deltaHeightTranslationScaleRatio = (window.innerHeight - borderHeight) / originalCanvasHeight;
+                //borderWidth = 0;
+                //borderHeight = 0;
+                if ((borderWidth > 100) || (borderHeight > 100)) {
+                    borderWidth = 8;
+                    borderHeight = 20;
+                }
+                deltaWidthTranslationScaleRatio = (docDocEleClientWidth - borderWidth) / originalCanvasWidth;
+                deltaHeightTranslationScaleRatio = (docDocEleClientHeight - borderHeight) / originalCanvasHeight;
+
+                // Update
+                //canvas.width = window.innerWidth - borderWidth;
+                //canvas.height = window.innerHeight - borderHeight;
+                canvas.width = docDocEleClientWidth - borderWidth;
+                canvas.height = docDocEleClientHeight - borderHeight;
+
+                updateAllClockDigitsAndNumbers();
+
+                updateClock();
+            }
+
+            function getTimeRemaining(endtime) {
+                'use strict';
+                var clockDigits = [-1, -1, -1, -1, -1, -1, -1, -1];
+                //var t = Date.parse(endtime) - Date.parse(new Date());
+                var ntp_time = new Date();
+                ntp_time = Date(NTP.fixTime(ntp_time.getTime()));
+
+                var t = Date.parse(endtime) - Date.parse(ntp_time);
+                var seconds = Math.floor((t / 1000) % 60);
+                var minutes = Math.floor((t / 1000 / 60) % 60);
+                var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+                var days = Math.floor(t / (1000 * 60 * 60 * 24));
+
+                if ((days < 0) && (days > 99)) {
+                    // popup error
+                    clockDigits = [-1, -1, -1, -1, -1, -1, -1, -1];
+                    return -1;
+                }
+                if ((days > 9) && (days < 100)) {
+                    clockDigits[0] = Number((days.toString()).charAt(0));
+                    clockDigits[1] = Number((days.toString()).charAt(1));
+                }
+                else {
+                    clockDigits[0] = 0;
+                    clockDigits[1] = Number((days.toString()).charAt(0));
+                }
+
+                if ((hours < 0) && (hours > 99)) {
+                    // popup error
+                    clockDigits = [-1, -1, -1, -1, -1, -1, -1, -1];
+                    return -1;
+                }
+                if ((hours > 9) && (hours < 100)) {
+                    clockDigits[2] = Number((hours.toString()).charAt(0));
+                    clockDigits[3] = Number((hours.toString()).charAt(1));
+                }
+                else {
+                    clockDigits[2] = 0;
+                    clockDigits[3] = Number((hours.toString()).charAt(0));;
+                }
+                if ((minutes < 0) && (minutes > 99)) {
+                    // popup error
+                    clockDigits = [-1, -1, -1, -1, -1, -1, -1, -1];
+                    return -1;
+                }
+
+                if ((minutes > 9) && (minutes < 100)) {
+                    clockDigits[4] = Number((minutes.toString()).charAt(0));
+                    clockDigits[5] = Number((minutes.toString()).charAt(1));
+                }
+                else {
+                    clockDigits[4] = 0;
+                    clockDigits[5] = Number((minutes.toString()).charAt(0));
+                }
+
+                if ((seconds < 0) && (seconds > 99)) {
+                    // popup error
+                    clockDigits = [-1, -1, -1, -1, -1, -1, -1, -1];
+                    return -1;
+                }
+                if ((seconds > 9) && (seconds < 100)) {
+                    clockDigits[6] = Number((seconds.toString()).charAt(0));
+                    clockDigits[7] = Number((seconds.toString()).charAt(1));
+                }
+                else {
+                    clockDigits[6] = 0;
+                    clockDigits[7] = Number((seconds.toString()).charAt(0));
+                }
+                return { 'total': clockDigits, 'clockDisplay': clockDigits };
+            }
+
+            function updateClock() {
+                var t = getTimeRemaining(stage1_event);                
+                drawFrame(t.clockDisplay);
+                if (t.total <= 0) {
+                    //NOTE: Check functionality of clearInterval
+                    clearInterval(timeinterval);
+                }
+            }
+
+            function drawFrame(clockDisplay) {
+                var newTransition;               
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.save();
+                var updatedTranslation = getTransition(staticItemsOriginalCenterLocation.cJPFooter, staticItemsCenterLocation.cJPFooter);
+                ctx.translate(updatedTranslation.x, updatedTranslation.y);
+                var image_CJPFooter = document.getElementById("image_CJPFooter");
+                var updatedOffsetAndSize = getOffsetAndSize(image_CJPFooter, staticItemsCenterOffset.cJPFooter, staticItemsSize.cJPFooter);
+                CJPFooter(ctx, image_CJPFooter, updatedOffsetAndSize);
+                ctx.restore();
+
+                //background(ctx);
+                // Save canvas 
+                ctx.save();
+                // Translate canvas 
+                //var updatedCallumPose1 = getTransition(staticItemsCenterLocation.callumpose1);
+                var image_CallumPose1 = document.getElementById("image_CallumPose1");
+                var updatedCallumPose1 = getTransition(staticItemsOriginalCenterLocation.callumpose1, staticItemsCenterLocation.callumpose1);
+                ctx.translate(updatedCallumPose1.x, updatedCallumPose1.y);
+                var updatedOffsetAndSize = getOffsetAndSize(image_CallumPose1, staticItemsCenterOffset.callumpose1, staticItemsSize.callumpose1);
+                // Draw
+                callumpose1(ctx, image_CallumPose1, updatedOffsetAndSize);
+                // Restore canvas context
+                ctx.restore();
+
+                ctx.save();
+                //var updatedClockFramework = getTransition(staticItemsCenterLocation.clockFramework);
+                var updatedClockFramework = getTransition(staticItemsOriginalCenterLocation.clockFramework, staticItemsCenterLocation.clockFramework);
+                ctx.translate(updatedClockFramework.x, updatedClockFramework.y);
+                var image_ClockFramework = document.getElementById("image_ClockFramework");
+                var updatedOffsetAndSize = getOffsetAndSize(image_ClockFramework, staticItemsCenterOffset.clockFramework, staticItemsSize.clockFramework);
+                clockFramework(ctx, image_ClockFramework, updatedOffsetAndSize);
+                ctx.restore();
+
+                //ctx.save();
+                //var updatedClockTitleSeconds = getTransition(static_items.clockTitleSeconds);
+                //ctx.translate(updatedClockTitleSeconds.x, updatedClockTitleSeconds.y);
+                //clockTitleSeconds(ctx);
+                //ctx.restore();
+
+
+
+                ctx.save();
+                var updatedTranslation = getTransition(staticItemsOriginalCenterLocation.clockTitleSeconds, staticItemsCenterLocation.clockTitleSeconds);
+                ctx.translate(updatedTranslation.x, updatedTranslation.y);
+                var image_ClockTitleSeconds = document.getElementById("image_ClockTitleSeconds");
+                var updatedOffsetAndSize = getOffsetAndSize(image_ClockTitleSeconds, staticItemsCenterOffset.clockTitleSeconds, staticItemsSize.clockTitleSeconds);
+                cJPEventTitle(ctx, image_ClockTitleSeconds, updatedOffsetAndSize);
+                ctx.restore();
+
+                //ctx.save();
+                //var updatedClockTitleMinutes = getTransition(static_items.clockTitleMinutes);
+                //ctx.translate(updatedClockTitleMinutes.x, updatedClockTitleMinutes.y);
+                //clockTitleMinutes(ctx);
+                //ctx.restore();
+                ctx.save();
+                var updatedTranslation = getTransition(staticItemsOriginalCenterLocation.clockTitleMinutes, staticItemsCenterLocation.clockTitleMinutes);
+                ctx.translate(updatedTranslation.x, updatedTranslation.y);
+                var image_ClockTitleMinutes = document.getElementById("image_ClockTitleMinutes");
+                var updatedOffsetAndSize = getOffsetAndSize(image_ClockTitleMinutes, staticItemsCenterOffset.clockTitleMinutes, staticItemsSize.clockTitleMinutes);
+                cJPEventTitle(ctx, image_ClockTitleMinutes, updatedOffsetAndSize);
+                ctx.restore();
+
+                //ctx.save();
+                //var updatedClockTitleHours = getTransition(static_items.clockTitleHours);
+                //ctx.translate(updatedClockTitleHours.x, updatedClockTitleHours.y);
+                //clockTitleHours(ctx);
+                //ctx.restore();
+                ctx.save();
+                var updatedTranslation = getTransition(staticItemsOriginalCenterLocation.clockTitleHours, staticItemsCenterLocation.clockTitleHours);
+                ctx.translate(updatedTranslation.x, updatedTranslation.y);
+                var image_ClockTitleHours = document.getElementById("image_ClockTitleHours");
+                var updatedOffsetAndSize = getOffsetAndSize(image_ClockTitleHours, staticItemsCenterOffset.clockTitleHours, staticItemsSize.clockTitleHours);
+                cJPEventTitle(ctx, image_ClockTitleHours, updatedOffsetAndSize);
+                ctx.restore();
+
+                //ctx.save();
+                //var updatedClockTitleDays = getTransition(static_items.clockTitleDays);
+                //ctx.translate(updatedClockTitleDays.x, updatedClockTitleDays.y);
+                //clockTitleDays(ctx);
+                //ctx.restore();
+                ctx.save();
+                var updatedTranslation = getTransition(staticItemsOriginalCenterLocation.clockTitleDays, staticItemsCenterLocation.clockTitleDays);
+                ctx.translate(updatedTranslation.x, updatedTranslation.y);
+                var image_ClockTitleDays = document.getElementById("image_ClockTitleDays");
+                var updatedOffsetAndSize = getOffsetAndSize(image_ClockTitleDays, staticItemsCenterOffset.clockTitleDays, staticItemsSize.clockTitleDays);
+                cJPEventTitle(ctx, image_ClockTitleDays, updatedOffsetAndSize);
+                ctx.restore();
+
+                // Draw Clock Display
+
+                //Draw Days Display
+                //var updatedClockDisplayDaysDigit1 = getTransition(static_items.clockDisplayDaysDigit1);
+                //var updatedClockDisplayDaysDigit2 = getTransition(static_items.clockDisplayDaysDigit2);
+                var updatedClockDisplayDaysDigit1Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplayDaysDigit1, staticItemsCenterLocation.clockDisplayDaysDigit1);
+                var updatedClockDisplayDaysDigit2Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplayDaysDigit2, staticItemsCenterLocation.clockDisplayDaysDigit2);
+                if(clockDisplay[0] != -1){
+                    ctx.save();            
+                    ctx.translate(updatedClockDisplayDaysDigit1Translation.x, updatedClockDisplayDaysDigit1Translation.y);
+                    clockDisplayFunctions[clockDisplay[0]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayDaysDigit1Translation.x, updatedClockDisplayDaysDigit1Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }                
+                if (clockDisplay[1] != -1) {
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayDaysDigit2Translation.x, updatedClockDisplayDaysDigit2Translation.y);
+                    clockDisplayFunctions[clockDisplay[1]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayDaysDigit2Translation.x, updatedClockDisplayDaysDigit2Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+
+                //Draw Hours Display
+                //var updatedClockDisplayHoursDigit1 = getTransition(static_items.clockDisplayHoursDigit1);
+                //var updatedClockDisplayHoursDigit2 = getTransition(static_items.clockDisplayHoursDigit2);
+                var updatedClockDisplayHoursDigit1Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplayHoursDigit1, staticItemsCenterLocation.clockDisplayHoursDigit1);
+                var updatedClockDisplayHoursDigit2Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplayHoursDigit2, staticItemsCenterLocation.clockDisplayHoursDigit2);
+                if (clockDisplay[2] != -1) {
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayHoursDigit1Translation.x, updatedClockDisplayHoursDigit1Translation.y);
+                    clockDisplayFunctions[clockDisplay[2]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayHoursDigit1Translation.x, updatedClockDisplayHoursDigit1Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+                if (clockDisplay[3] != -1) {
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayHoursDigit2Translation.x, updatedClockDisplayHoursDigit2Translation.y);
+                    clockDisplayFunctions[clockDisplay[3]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayHoursDigit2Translation.x, updatedClockDisplayHoursDigit2Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+
+                //Draw Minutes Display
+                //var updatedClockDisplayMinutesDigit1 = getTransition(static_items.clockDisplayMinutesDigit1);
+                //var updatedClockDisplayMinutesDigit2 = getTransition(static_items.clockDisplayMinutesDigit2);
+                var updatedClockDisplayMinutesDigit1Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplayMinutesDigit1, staticItemsCenterLocation.clockDisplayMinutesDigit1);
+                var updatedClockDisplayMinutesDigit2Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplayMinutesDigit2, staticItemsCenterLocation.clockDisplayMinutesDigit2);
+                if (clockDisplay[4] != -1) {
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayMinutesDigit1Translation.x, updatedClockDisplayMinutesDigit1Translation.y); 
+                    clockDisplayFunctions[clockDisplay[4]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayMinutesDigit1Translation.x, updatedClockDisplayMinutesDigit1Translation.y); 
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+                if (clockDisplay[5] != -1) {
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayMinutesDigit2Translation.x, updatedClockDisplayMinutesDigit2Translation.y);
+                    clockDisplayFunctions[clockDisplay[5]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    ctx.translate(updatedClockDisplayMinutesDigit2Translation.x, updatedClockDisplayMinutesDigit2Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+
+                //Draw Seconds Display
+                //var updatedClockDisplaySecondsDigit1 = getTransition(static_items.clockDisplaySecondsDigit1);
+                //var updatedClockDisplaySecondsDigit2 = getTransition(static_items.clockDisplaySecondsDigit2);
+                var updatedClockDisplaySecondsDigit1Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplaySecondsDigit1, staticItemsCenterLocation.clockDisplaySecondsDigit1);
+                var updatedClockDisplaySecondsDigit2Translation = getTransition(staticItemsOriginalCenterLocation.clockDisplaySecondsDigit2, staticItemsCenterLocation.clockDisplaySecondsDigit2);                
+                if (clockDisplay[6] != -1) {
+                    ctx.save();
+                    //ctx.translate(updatedClockDisplaySecondsDigit1.x, updatedClockDisplaySecondsDigit1.y);
+                    ctx.translate(updatedClockDisplaySecondsDigit1Translation.x, updatedClockDisplaySecondsDigit1Translation.y);                                       
+                    clockDisplayFunctions[clockDisplay[6]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    //ctx.translate(updatedClockDisplaySecondsDigit1.x, updatedClockDisplaySecondsDigit1.y);
+                    ctx.translate(updatedClockDisplaySecondsDigit1Translation.x, updatedClockDisplaySecondsDigit1Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+                if (clockDisplay[7] != -1) {
+                    ctx.save();
+                    //ctx.translate(updatedClockDisplaySecondsDigit2.x, updatedClockDisplaySecondsDigit2.y);
+                    ctx.translate(updatedClockDisplaySecondsDigit2Translation.x, updatedClockDisplaySecondsDigit2Translation.y);
+                    clockDisplayFunctions[clockDisplay[7]](ctx);
+                    ctx.restore();
+                }
+                else {
+                    //Display zero
+                    ctx.save();
+                    //ctx.translate(updatedClockDisplaySecondsDigit2.x, updatedClockDisplaySecondsDigit2.y);
+                    ctx.translate(updatedClockDisplaySecondsDigit2Translation.x, updatedClockDisplaySecondsDigit2Translation.y);
+                    clockDisplayFunctions[0](ctx);
+                    ctx.restore();
+                }
+                
+                ctx.save();
+                var updatedTranslation = getTransition(staticItemsOriginalCenterLocation.cJPEventTitle, staticItemsCenterLocation.cJPEventTitle);
+                ctx.translate(updatedTranslation.x, updatedTranslation.y);
+                var image_CJPEventTitle = document.getElementById("image_CJPEventTitle");
+                var updatedOffsetAndSize = getOffsetAndSize(image_CJPEventTitle, staticItemsCenterOffset.cJPEventTitle, staticItemsSize.cJPEventTitle);
+                cJPEventTitle(ctx, image_CJPEventTitle, updatedOffsetAndSize);
+                ctx.restore();
+
+                prevDeltaWidthTranslationScaleRatio = deltaWidthTranslationScaleRatio;
+                prevDeltaHeightTranslationScaleRatio = deltaHeightTranslationScaleRatio;
+
+                firstRun = 0;
+
+            }
+
+            function onInitialisationSetTransition(staticItemOriginal, staticItem) {
+                var newStaticItem = { 'x': staticItem.x, 'y': staticItem.y };
+                var ratio = Math.min(deltaWidthTranslationScaleRatio, deltaHeightTranslationScaleRatio);
+
+                var addXToCenter = 0;
+                var addYToCenter = 0;
+
+                addXToCenter = (canvas.width - (originalCanvasWidth * ratio)) / 2;
+                addYToCenter = (canvas.height - (originalCanvasHeight * ratio)) / 2;
+
+                newStaticItem.x = (staticItemOriginal.x * ratio) + addXToCenter;
+                newStaticItem.y = (staticItemOriginal.y * ratio) + addYToCenter;
+
+                staticItem.x = newStaticItem.x;
+                staticItem.y = newStaticItem.y;
+            }
+            function getTransition(staticItemOriginal, staticItem) {
+                var newStaticItem = { 'x': staticItem.x, 'y': staticItem.y };
+                var ratio = Math.min(deltaWidthTranslationScaleRatio, deltaHeightTranslationScaleRatio);
+                // Only change the transition once on each device dimension change
+                if ((deltaWidthTranslationScaleRatio != prevDeltaWidthTranslationScaleRatio) || (deltaHeightTranslationScaleRatio != prevDeltaHeightTranslationScaleRatio)) {
+                    var addXToCenter = 0;
+                    var addYToCenter = 0;
+
+                    addXToCenter = (canvas.width - (originalCanvasWidth * ratio)) / 2;
+                    addYToCenter = (canvas.height - (originalCanvasHeight * ratio)) / 2;
+
+                    newStaticItem.x = (staticItemOriginal.x * ratio) + addXToCenter;
+                    newStaticItem.y = (staticItemOriginal.y * ratio) + addYToCenter;
+
+                    staticItem.x = newStaticItem.x;
+                    staticItem.y = newStaticItem.y;
+                }
+                return newStaticItem;
+            }
+
+            function onInitialisationSetOffsetAndSize(image, offset, size) {                
+                var ratio = Math.min(deltaWidthTranslationScaleRatio, deltaHeightTranslationScaleRatio);
+                                
+                size.width = image.width * ratio;
+                offset.x = -((image.width * ratio) / 2);
+
+                size.height = image.height * ratio;
+                offset.y = -((image.height * ratio) / 2);                
+            }
+            function getOffsetAndSize(image, offset, size) {                
+                var newOffsetAndSize = { 'offset': { 'x': offset.x, 'y': offset.y }, 'size': { 'width': size.width, 'height': size.height } };
+                var ratio = Math.min(deltaWidthTranslationScaleRatio, deltaHeightTranslationScaleRatio);
+                if ((deltaWidthTranslationScaleRatio != prevDeltaWidthTranslationScaleRatio) || (deltaHeightTranslationScaleRatio != prevDeltaHeightTranslationScaleRatio)) {
+                    var newWidth = image.width * ratio;
+                    size.width = newWidth;
+                    var newXPosition = -((image.width * ratio) / 2);
+                    offset.x = newXPosition;
+
+                    var newHeight = image.height * ratio;
+                    size.height = newHeight;
+                    var newYPosition = -((image.height * ratio) / 2);
+                    offset.y = newYPosition;
+
+                    newOffsetAndSize.offset.x = newXPosition;
+                    newOffsetAndSize.offset.y = newYPosition;
+                    newOffsetAndSize.size.width = newWidth;
+                    newOffsetAndSize.size.height = newHeight;
+                }
+                return newOffsetAndSize;
+            }
+            
+            function background(ctx) {
+                // background/Rectangle
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(1017.3, 966.0);
+                ctx.lineTo(6.7, 966.0);
+                ctx.bezierCurveTo(3.0, 966.0, 0.0, 963.0, 0.0, 959.3);
+                ctx.lineTo(0.0, 6.7);
+                ctx.bezierCurveTo(0.0, 3.0, 3.0, 0.0, 6.7, 0.0);
+                ctx.lineTo(1017.3, 0.0);
+                ctx.bezierCurveTo(1021.0, 0.0, 1024.0, 3.0, 1024.0, 6.7);
+                ctx.lineTo(1024.0, 959.3);
+                ctx.bezierCurveTo(1024.0, 963.0, 1021.0, 966.0, 1017.3, 966.0);
+                ctx.closePath();
+                // CSS overides this fill.
+                //ctx.fillStyle = "rgb(254, 254, 51)"; //Pale Yellow
+                ctx.fillStyle = "rgb(00, 236, 185)"; // Pale Green
+                ctx.fill();
+                ctx.restore();
+            }
+            
+            function callumpose1(ctx, image, offsetAndSize) {
+                //var alpha = ctx.globalAlpha;
+
+                // callumpose1                
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+        
+            function clockFramework(ctx, image, offsetAndSize) {
+                // clockFramework
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+
+            function clockTitleSeconds(ctx, image, offsetAndSize) {
+                // clockTitleSeconds
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+
+            function clockTitleMinutes(ctx, image, offsetAndSize) {
+                // clockTitleMinutes
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+
+            function clockTitleHours(ctx, image, offsetAndSize) {
+                // clockTitleHours
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);;
+            }
+
+            function clockTitleDays(ctx, image, offsetAndSize) {
+                // clockTitleDays
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+
+            function clockdigitnine1(ctx) {
+                // clockdigitnine1
+                //var numberImage = document.getElementById("image_ClockDigitNine1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[9], staticItemsCenterOffset.numberNine, staticItemsSize.numberNine); 
+                //ctx.drawImage(document.getElementById("image_ClockDigitNine1"), -20.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[9],
+                    0, 0,
+                    sortedClockNumberImages[9].width, sortedClockNumberImages[9].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitnine2(ctx) {
+            //    // clockdigitnine1
+            //    ctx.drawImage(document.getElementById("image_ClockDigitNine2"), -20.0, -47.0);
+            //}
+
+            function clockdigiteight1(ctx) {
+                // clockdigiteight
+                //var numberImage = document.getElementById("image_ClockDigitEight1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[8], staticItemsCenterOffset.numberEight, staticItemsSize.numberEight);
+                //ctx.drawImage(document.getElementById("image_ClockDigitEight1"), -21.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[8],
+                    0, 0,
+                    sortedClockNumberImages[8].width, sortedClockNumberImages[8].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigiteight2(ctx) {
+            //    // clockdigiteight
+            //    ctx.drawImage(document.getElementById("image_ClockDigitEight2"), -21.0, -47.0);
+            //}
+
+            function clockdigitseven1(ctx) {
+                // clockdigitseven
+                //var numberImage = document.getElementById("image_ClockDigitSeven1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[7], staticItemsCenterOffset.numberSeven, staticItemsSize.numberSeven);
+                //ctx.drawImage(document.getElementById("image_ClockDigitSeven1"), -19.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[7],
+                    0, 0,
+                    sortedClockNumberImages[7].width, sortedClockNumberImages[7].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitseven2(ctx) {
+
+            //    // clockdigitseven2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitSeven2"), -19.0, -47.0);
+            //}
+
+            function clockdigitsix1(ctx) {
+                // clockdigitsix1
+                //var numberImage = document.getElementById("image_ClockDigitSix1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[6], staticItemsCenterOffset.numberSix, staticItemsSize.numberSix);
+                //ctx.drawImage(document.getElementById("image_ClockDigitSix1"), -16.5, -47.0);
+                ctx.drawImage(sortedClockNumberImages[6],
+                    0, 0,
+                    sortedClockNumberImages[6].width, sortedClockNumberImages[6].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitsix2(ctx) {
+
+            //    // clockdigitsix2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitSix2"), -16.5, -47.0);
+            //}
+
+            function clockdigitfive1(ctx) {
+                // clockdigitfive1
+                //var numberImage = document.getElementById("image_ClockDigitFive1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[5], staticItemsCenterOffset.numberFive, staticItemsSize.numberFive);
+                //ctx.drawImage(document.getElementById("image_ClockDigitFive1"), -18.5, -47.0);
+                ctx.drawImage(sortedClockNumberImages[5],
+                    0, 0,
+                    sortedClockNumberImages[5].width, sortedClockNumberImages[5].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitfive2(ctx) {
+
+            //    // clockdigitfive2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitFive2"), -18.5, -47.0);
+            //}
+
+            function clockdigitfour1(ctx) {
+                // clockdigitfour1
+                //var numberImage = document.getElementById("image_ClockDigitFour1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[4], staticItemsCenterOffset.numberFour, staticItemsSize.numberFour);
+                //ctx.drawImage(document.getElementById("image_ClockDigitFour1"), -19.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[4],
+                    0, 0,
+                    sortedClockNumberImages[4].width, sortedClockNumberImages[4].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitfour2(ctx) {
+            //    // clockdigitfour2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitFour2"), -19.0, -47.0);
+            //}
+
+            function clockdigitthree1(ctx) {
+                // clockdigitthree1
+                //var numberImage = document.getElementById("image_ClockDigitThree1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[3], staticItemsCenterOffset.numberThree, staticItemsSize.numberThree);
+                //ctx.drawImage(document.getElementById("image_ClockDigitThree1"), -20.5, -47.0);
+                ctx.drawImage(sortedClockNumberImages[3],
+                    0, 0,
+                    sortedClockNumberImages[3].width, sortedClockNumberImages[3].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitthree2(ctx) {
+            //    // clockdigitthree2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitThree2"), -20.5, -47.0);
+            //}
+
+            function clockdigittwo1(ctx) {
+                // clockdigittwo1
+                //var numberImage = document.getElementById("image_ClockDigitTwo1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[2], staticItemsCenterOffset.numberTwo, staticItemsSize.numberTwo);
+                //ctx.drawImage(document.getElementById("image_ClockDigitTwo1"), -19.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[2],
+                    0, 0,
+                    sortedClockNumberImages[2].width, sortedClockNumberImages[2].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigittwo2(ctx) {
+            //    // clockdigittwo2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitTwo2"), -19.0, -47.0);
+            //}
+
+            function clockdigitone1(ctx) {
+                // clockdigitone1
+                //var numberImage = document.getElementById("image_ClockDigitOne1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[1], staticItemsCenterOffset.numberOne, staticItemsSize.numberOne);
+                //ctx.drawImage(document.getElementById("image_ClockDigitOne1"), -14.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[1],
+                    0, 0,
+                    sortedClockNumberImages[1].width, sortedClockNumberImages[1].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitone2(ctx) {
+            //    // clockdigitone2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitOne2"), -14.0, -47.0);
+            //}
+
+            function clockdigitzero1(ctx) {
+                // clockdigitzero1
+                //var numberImage = document.getElementById("image_ClockDigitZero1");
+                var updatedOffsetAndSize = getOffsetAndSize(sortedClockNumberImages[0], staticItemsCenterOffset.numberZero, staticItemsSize.numberZero);
+                //ctx.drawImage(document.getElementById("image_ClockDigitZero1"), -20.0, -47.0);
+                ctx.drawImage(sortedClockNumberImages[0],
+                    0, 0,
+                    sortedClockNumberImages[0].width, sortedClockNumberImages[0].height,
+                    updatedOffsetAndSize.offset.x, updatedOffsetAndSize.offset.y,
+                    updatedOffsetAndSize.size.width, updatedOffsetAndSize.size.height);
+            }
+            //function clockdigitzero2(ctx) {
+            //    // clockdigitzero2
+            //    ctx.drawImage(document.getElementById("image_ClockDigitZero2"), -20.0, -47.0);
+            //}
+
+            //function cJPEventTitle(ctx) {
+
+            //    // cJPEventTitle
+            //    ctx.drawImage(document.getElementById("image_CJPEventTitle"), -168.0, -162.0);
+            //}
+
+            function cJPEventTitle(ctx, image, offsetAndSize) {
+                // cJPEventTitle
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+
+            function CJPFooter(ctx, image, offsetAndSize) {
+                // cJPFooter
+                ctx.drawImage(image,
+                    0, 0,
+                    image.width, image.height,
+                    offsetAndSize.offset.x, offsetAndSize.offset.y,
+                    offsetAndSize.size.width, offsetAndSize.size.height);
+            }
+        </script>
+    </head>
+    <body onload="init()" background="#00ECB9"> 
+        <canvas id="canvas" width="679" height="979"></canvas>
+        <img alt="CallumPose1" id="image_CallumPose1" style="display: none" src="images/callumpose1.png" />
+        <img alt="ClockFramework" id="image_ClockFramework" style="display: none" src="images/Clock-framework.png" />
+        <img alt="ClockTitleSeconds" id="image_ClockTitleSeconds" style="display: none" src="images/Clock-title-Seconds.png" />
+        <img alt="ClockTitleMinutes" id="image_ClockTitleMinutes" style="display: none" src="images/Clock-title-Minutes.png" />
+        <img alt="ClockTitleHours" id="image_ClockTitleHours" style="display: none" src="images/Clock-title-hours.png" />
+        <img alt="ClockTitleDays" id="image_ClockTitleDays" style="display: none" src="images/Clock-title-days.png" />
+        <img alt="ClockDigitNine1" id="image_ClockDigitNine1" style="display: none" src="images/clock-digit-nine.png" />
+            <!--<img alt="ClockDigitNine2" id="image_ClockDigitNine2" style="display: none" src="clock-digit-nine.png" />-->
+        <img alt="ClockDigitEight1" id="image_ClockDigitEight1" style="display: none" src="images/clock-digit-eight.png" />
+            <!--<img alt="ClockDigitEight2" id="image_ClockDigitEight2" style="display: none" src="clock-digit-eight.png" />-->
+        <img alt="ClockDigitSeven1" id="image_ClockDigitSeven1" style="display: none" src="images/clock-digit-seven.png" />
+            <!--<img alt="ClockDigitSeven2" id="image_ClockDigitSeven2" style="display: none" src="clock-digit-seven.png" />-->
+        <img alt="ClockDigitSix1" id="image_ClockDigitSix1" style="display: none" src="images/clock-digit-six.png" />
+            <!--<img alt="ClockDigitSix2" id="image_ClockDigitSix2" style="display: none" src="clock-digit-six.png" />-->
+        <img alt="ClockDigitFive1" id="image_ClockDigitFive1" style="display: none" src="images/clock-digit-five.png" />
+            <!--<img alt="ClockDigitFive2" id="image_ClockDigitFive2" style="display: none" src="clock-digit-five.png" />-->
+        <img alt="ClockDigitFour1" id="image_ClockDigitFour1" style="display: none" src="images/clock-digit-four.png" />
+            <!--<img alt="ClockDigitFour2" id="image_ClockDigitFour2" style="display: none" src="clock-digit-four.png" />-->
+        <img alt="ClockDigitThree1" id="image_ClockDigitThree1" style="display: none" src="images/clock-digit-three.png" />
+            <!--<img alt="ClockDigitThree2" id="image_ClockDigitThree2" style="display: none" src="clock-digit-three.png" />-->
+        <img alt="ClockDigitTwo1" id="image_ClockDigitTwo1" style="display: none" src="images/clock-digit-two.png" />
+            <!--<img alt="ClockDigitTwo2" id="image_ClockDigitTwo2" style="display: none" src="clock-digit-two.png" />-->
+        <img alt="ClockDigitOne1" id="image_ClockDigitOne1" style="display: none" src="images/clock-digit-one.png" />
+            <!--<img alt="ClockDigitOne2" id="image_ClockDigitOne2" style="display: none" src="clock-digit-one.png" />-->
+        <img alt="ClockDigitZero1" id="image_ClockDigitZero1" style="display: none" src="images/clock-digit-zero.png" />
+            <!--<img alt="ClockDigitZero2" id="image_ClockDigitZero2" style="display: none" src="clock-digit-zero.png" />-->
+        <img alt="CJP Event Title" id="image_CJPEventTitle" style="display: none" src="images/CJP-event-title.png" />
+        <img alt="CJP Footer" id="image_CJPFooter" style="display: none" src="images/footer.png" />
+    </body>
+</html>
