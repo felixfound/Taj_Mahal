@@ -1,0 +1,2244 @@
+﻿<!DOCTYPE html>
+
+<!-- Created with Ai->Canvas Export Plug-In Version 1.3 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)             -->
+
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <title>Home page (tablet) [Brick background animation]</title>
+  <script src="Ai2CanvasAnimation.js"></script>
+  <script>
+
+    // Main canvas and context references
+    var canvas;
+    var ctx;
+      var filmstripstart1_show = true;
+      var filmstripstart2_show = true;
+      var filmstripstart3_show = true;
+    // Frames per second
+    var fps = 60.0;
+
+    // Animations
+    var animations = [ new rR34path(), new lR34path(), new rR16path(), new lR16path(), new filmstriprightborderstartpath(), new filmstripleftborderstartpath(), new film1path(), new filmstriprightborderstart2path(), new filmstripleftborderstart2path(), new film2path(), new filmstriprightborderstart3path(), new filmstripleftborderstart3path(), new filmstripstart3path(), new filmstriprightborderanimpath(), new filmstripleftborderanimpath(), new filmstripanimpath(), new rR54path(), new lR54path(), new rR53path(), new lR53path(), new rR52path(), new lR52path(), new nbr6c16path(), new nbr1c16path(), new nbr1c15path(), new nbr1c14path(), new nbr1c13path(), new nbr1c12path(), new nbr1c11path(), new nbr1c10path(), new nbr1c9path(), new nbr1c8path(), new nbr1c7path(), new nbr1c6path(), new nbr1c5path(), new nbr1c4path(), new nbr1c3path(), new nbr1c2path(), new nbr1c1path() ];
+
+    function rR34path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1299.5, 770.0], [1126.2, 770.0], [953.0, 770.0], [774.5, 770.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 3.00, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function lR34path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-262.5, 770.0], [-89.2, 770.0], [84.0, 770.0], [262.5, 770.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 3.00, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function rR16path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1299.5, 356.0], [1126.2, 356.0], [953.0, 356.0], [774.5, 356.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 1.36, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function lR16path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-262.5, 356.0], [-89.2, 356.0], [84.0, 356.0], [262.5, 356.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 1.36, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstriprightborderstartpath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [920.0, 1589.0], [920.0, 1315.1], [920.0, 1041.2], [920.0, 759.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.06, 0.06], [0, 0.13, 0.13], [0, 0.19, 0.19], 
+                    [0, 0.25, 0.25], [0, 0.32, 0.31], [0, 0.38, 0.38], [0, 0.44, 0.44], 
+                    [0, 0.50, 0.50], [0, 0.57, 0.56], [0, 0.63, 0.63], [0, 0.69, 0.69], 
+                    [0, 0.75, 0.75], [0, 0.82, 0.81], [0, 0.88, 0.88], [0, 0.94, 0.94], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 6.86, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstripleftborderstartpath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [104.0, 1589.0], [104.0, 1315.1], [104.0, 1041.2], [104.0, 759.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.06, 0.06], [0, 0.13, 0.13], [0, 0.19, 0.19], 
+                    [0, 0.25, 0.25], [0, 0.32, 0.31], [0, 0.38, 0.38], [0, 0.44, 0.44], 
+                    [0, 0.50, 0.50], [0, 0.57, 0.56], [0, 0.63, 0.63], [0, 0.69, 0.69], 
+                    [0, 0.75, 0.75], [0, 0.82, 0.81], [0, 0.88, 0.88], [0, 0.94, 0.94], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 6.86, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function film1path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [512.0, 1589.0], [512.0, 1315.1], [512.0, 1041.2], [512.0, 759.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.06, 0.06], [0, 0.13, 0.13], [0, 0.19, 0.19], 
+                    [0, 0.25, 0.25], [0, 0.32, 0.31], [0, 0.38, 0.38], [0, 0.44, 0.44], 
+                    [0, 0.50, 0.50], [0, 0.57, 0.56], [0, 0.63, 0.63], [0, 0.69, 0.69], 
+                    [0, 0.75, 0.75], [0, 0.82, 0.81], [0, 0.88, 0.88], [0, 0.94, 0.94], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 6.86, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstriprightborderstart2path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [920.0, 759.0], [920.0, 891.0], [920.0, 1023.0], [920.0, 1159.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.50, 8.26, 1, false, 1, quintEaseIn, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstripleftborderstart2path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [104.0, 759.0], [104.0, 891.0], [104.0, 1023.0], [104.0, 1159.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.50, 8.26, 1, false, 1, quintEaseIn, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function film2path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [512.0, 759.0], [512.0, 891.0], [512.0, 1023.0], [512.0, 1159.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.50, 8.26, 1, false, 1, quintEaseIn, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstriprightborderstart3path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [920.0, 1159.0], [920.0, 1027.0], [920.0, 895.0], [920.0, 759.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(0.50, 9.76, 1, false, 1, expoEaseIn, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstripleftborderstart3path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [104.0, 1159.0], [104.0, 1027.0], [104.0, 895.0], [104.0, 759.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(0.50, 9.76, 1, false, 1, expoEaseIn, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstripstart3path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [512.0, 1159.0], [512.0, 1027.0], [512.0, 895.0], [512.0, 759.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(0.50, 9.76, 1, false, 1, expoEaseIn, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstriprightborderanimpath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [920.0, 1590.0], [920.0, 1041.5], [920.0, 493.1], [920.0, -72.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.03, 0.03], [0, 0.06, 0.06], [0, 0.09, 0.09], 
+                    [0, 0.12, 0.12], [0, 0.15, 0.15], [0, 0.18, 0.18], [0, 0.21, 0.21], 
+                    [0, 0.24, 0.24], [0, 0.28, 0.27], [0, 0.31, 0.30], [0, 0.34, 0.33], 
+                    [0, 0.37, 0.36], [0, 0.40, 0.39], [0, 0.43, 0.42], [0, 0.46, 0.45], 
+                    [0, 0.49, 0.48], [0, 0.52, 0.52], [0, 0.55, 0.55], [0, 0.58, 0.58], 
+                    [0, 0.61, 0.61], [0, 0.64, 0.64], [0, 0.67, 0.67], [0, 0.70, 0.70], 
+                    [0, 0.73, 0.73], [0, 0.76, 0.76], [0, 0.79, 0.79], [0, 0.82, 0.82], 
+                    [0, 0.85, 0.85], [0, 0.88, 0.88], [0, 0.91, 0.91], [0, 0.94, 0.94], 
+                    [0, 0.97, 0.97], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(0.30, 10.38, 1, false, 100, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstripleftborderanimpath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [104.0, 1590.0], [104.0, 1041.5], [104.0, 493.1], [104.0, -72.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.03, 0.03], [0, 0.06, 0.06], [0, 0.09, 0.09], 
+                    [0, 0.12, 0.12], [0, 0.15, 0.15], [0, 0.18, 0.18], [0, 0.21, 0.21], 
+                    [0, 0.24, 0.24], [0, 0.28, 0.27], [0, 0.31, 0.30], [0, 0.34, 0.33], 
+                    [0, 0.37, 0.36], [0, 0.40, 0.39], [0, 0.43, 0.42], [0, 0.46, 0.45], 
+                    [0, 0.49, 0.48], [0, 0.52, 0.52], [0, 0.55, 0.55], [0, 0.58, 0.58], 
+                    [0, 0.61, 0.61], [0, 0.64, 0.64], [0, 0.67, 0.67], [0, 0.70, 0.70], 
+                    [0, 0.73, 0.73], [0, 0.76, 0.76], [0, 0.79, 0.79], [0, 0.82, 0.82], 
+                    [0, 0.85, 0.85], [0, 0.88, 0.88], [0, 0.91, 0.91], [0, 0.94, 0.94], 
+                    [0, 0.97, 0.97], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(0.30, 10.38, 1, false, 100, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function filmstripanimpath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [512.0, 1173.0], [512.0, 899.8], [512.0, 626.5], [512.0, 345.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.06, 0.06], [0, 0.13, 0.13], [0, 0.19, 0.19], 
+                    [0, 0.25, 0.25], [0, 0.32, 0.31], [0, 0.38, 0.38], [0, 0.44, 0.44], 
+                    [0, 0.50, 0.50], [0, 0.57, 0.56], [0, 0.63, 0.63], [0, 0.69, 0.69], 
+                    [0, 0.75, 0.75], [0, 0.82, 0.81], [0, 0.88, 0.88], [0, 0.94, 0.94], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(0.30, 10.38, 1, false, 2, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function rR54path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1299.5, 1223.0], [1126.2, 1223.0], [953.0, 1223.0], [774.5, 1223.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 4.82, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function lR54path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-262.5, 1223.0], [-89.2, 1223.0], [84.0, 1223.0], [262.5, 1223.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 4.82, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function rR53path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1286.5, 1207.0], [1113.2, 1207.0], [940.0, 1207.0], [761.5, 1207.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 4.73, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function lR53path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-275.5, 1207.0], [-102.2, 1207.0], [71.0, 1207.0], [249.5, 1207.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 4.73, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function rR52path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1299.5, 1184.0], [1126.2, 1184.0], [953.0, 1184.0], [774.5, 1184.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 4.64, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function lR52path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-262.5, 1184.0], [-89.2, 1184.0], [84.0, 1184.0], [262.5, 1184.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.10, 0.10], [0, 0.20, 0.20], [0, 0.30, 0.30], 
+                    [0, 0.40, 0.40], [0, 0.50, 0.50], [0, 0.60, 0.60], [0, 0.70, 0.70], 
+                    [0, 0.80, 0.80], [0, 0.90, 0.90], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 4.64, 1, false, 1, quintEaseOut, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr6c16path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-324.0, 1520.0], [110.0, 1464.9], [543.9, 1409.8], [991.0, 1353.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.04, 0.04], [0, 0.08, 0.08], [0, 0.12, 0.12], 
+                    [0, 0.16, 0.15], [0, 0.19, 0.19], [0, 0.23, 0.23], [0, 0.27, 0.27], 
+                    [0, 0.31, 0.31], [0, 0.35, 0.35], [0, 0.39, 0.38], [0, 0.43, 0.42], 
+                    [0, 0.47, 0.46], [0, 0.50, 0.50], [0, 0.54, 0.54], [0, 0.58, 0.58], 
+                    [0, 0.62, 0.62], [0, 0.66, 0.65], [0, 0.70, 0.69], [0, 0.73, 0.73], 
+                    [0, 0.77, 0.77], [0, 0.81, 0.81], [0, 0.85, 0.85], [0, 0.89, 0.88], 
+                    [0, 0.92, 0.92], [0, 0.96, 0.96], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 0.65, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c16path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [815.0, 1418.0], [878.5, 1358.6], [942.1, 1299.2], [1007.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.20, 0.20], [0, 0.40, 0.40], [0, 0.60, 0.60], 
+                    [0, 0.80, 0.80], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 0.71, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c15path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [193.0, 1447.0], [445.3, 1378.0], [697.6, 1309.1], [957.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.07, 0.07], [0, 0.13, 0.13], [0, 0.20, 0.20], 
+                    [0, 0.27, 0.27], [0, 0.34, 0.33], [0, 0.40, 0.40], [0, 0.47, 0.47], 
+                    [0, 0.54, 0.53], [0, 0.60, 0.60], [0, 0.67, 0.67], [0, 0.74, 0.73], 
+                    [0, 0.80, 0.80], [0, 0.87, 0.87], [0, 0.93, 0.93], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.00, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c14path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-4.0, 1542.0], [291.2, 1441.7], [586.4, 1341.4], [890.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.06, 0.06], [0, 0.11, 0.11], [0, 0.17, 0.17], 
+                    [0, 0.22, 0.22], [0, 0.28, 0.28], [0, 0.34, 0.33], [0, 0.39, 0.39], 
+                    [0, 0.45, 0.44], [0, 0.50, 0.50], [0, 0.56, 0.56], [0, 0.61, 0.61], 
+                    [0, 0.67, 0.67], [0, 0.73, 0.72], [0, 0.78, 0.78], [0, 0.84, 0.83], 
+                    [0, 0.89, 0.89], [0, 0.95, 0.94], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 2.43, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c13path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-170.0, 1583.0], [158.2, 1469.1], [486.4, 1355.3], [824.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.05, 0.05], [0, 0.10, 0.10], [0, 0.14, 0.14], 
+                    [0, 0.19, 0.19], [0, 0.24, 0.24], [0, 0.29, 0.29], [0, 0.34, 0.33], 
+                    [0, 0.38, 0.38], [0, 0.43, 0.43], [0, 0.48, 0.48], [0, 0.53, 0.52], 
+                    [0, 0.58, 0.57], [0, 0.62, 0.62], [0, 0.67, 0.67], [0, 0.72, 0.71], 
+                    [0, 0.77, 0.76], [0, 0.81, 0.81], [0, 0.86, 0.86], [0, 0.91, 0.90], 
+                    [0, 0.95, 0.95], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.79, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c12path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-322.0, 1458.0], [34.9, 1385.4], [391.8, 1312.8], [759.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.05, 0.05], [0, 0.09, 0.09], [0, 0.14, 0.14], 
+                    [0, 0.18, 0.18], [0, 0.23, 0.23], [0, 0.28, 0.27], [0, 0.32, 0.32], 
+                    [0, 0.37, 0.36], [0, 0.41, 0.41], [0, 0.46, 0.45], [0, 0.50, 0.50], 
+                    [0, 0.55, 0.55], [0, 0.59, 0.59], [0, 0.64, 0.64], [0, 0.69, 0.68], 
+                    [0, 0.73, 0.73], [0, 0.78, 0.77], [0, 0.82, 0.82], [0, 0.87, 0.86], 
+                    [0, 0.91, 0.91], [0, 0.96, 0.95], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.85, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c11path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-63.0, 1375.0], [186.6, 1329.8], [436.3, 1284.6], [693.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.07, 0.07], [0, 0.13, 0.13], [0, 0.20, 0.20], 
+                    [0, 0.27, 0.27], [0, 0.34, 0.33], [0, 0.40, 0.40], [0, 0.47, 0.47], 
+                    [0, 0.54, 0.53], [0, 0.60, 0.60], [0, 0.67, 0.67], [0, 0.74, 0.73], 
+                    [0, 0.80, 0.80], [0, 0.87, 0.87], [0, 0.93, 0.93], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 0.79, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c10path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [936.0, 1468.0], [834.0, 1392.1], [732.1, 1316.2], [627.0, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.14, 0.14], [0, 0.29, 0.29], [0, 0.43, 0.43], 
+                    [0, 0.58, 0.57], [0, 0.72, 0.71], [0, 0.86, 0.86], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.82, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c9path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1066.0, 1557.0], [899.2, 1451.7], [732.4, 1346.5], [560.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.09, 0.09], [0, 0.18, 0.18], [0, 0.28, 0.27], 
+                    [0, 0.37, 0.36], [0, 0.46, 0.45], [0, 0.55, 0.55], [0, 0.64, 0.64], 
+                    [0, 0.73, 0.73], [0, 0.82, 0.82], [0, 0.91, 0.91], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.79, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c8path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1035.0, 1465.0], [856.6, 1390.1], [678.3, 1315.2], [494.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.09, 0.09], [0, 0.18, 0.18], [0, 0.28, 0.27], 
+                    [0, 0.37, 0.36], [0, 0.46, 0.45], [0, 0.55, 0.55], [0, 0.64, 0.64], 
+                    [0, 0.73, 0.73], [0, 0.82, 0.82], [0, 0.91, 0.91], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 2.73, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c7path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [409.0, 1542.0], [415.1, 1441.7], [421.2, 1341.4], [427.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.17, 0.17], [0, 0.34, 0.33], [0, 0.50, 0.50], 
+                    [0, 0.67, 0.67], [0, 0.84, 0.83], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 1.39, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c6path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [1002.0, 1507.0], [791.8, 1418.2], [581.6, 1329.5], [365.0, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.08, 0.08], [0, 0.16, 0.15], [0, 0.23, 0.23], 
+                    [0, 0.31, 0.31], [0, 0.39, 0.38], [0, 0.47, 0.46], [0, 0.54, 0.54], 
+                    [0, 0.62, 0.62], [0, 0.70, 0.69], [0, 0.77, 0.77], [0, 0.85, 0.85], 
+                    [0, 0.92, 0.92], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 0.49, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c5path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [676.0, 1473.0], [551.4, 1395.4], [426.8, 1317.9], [298.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.13, 0.13], [0, 0.25, 0.25], [0, 0.38, 0.38], 
+                    [0, 0.50, 0.50], [0, 0.63, 0.63], [0, 0.75, 0.75], [0, 0.88, 0.88], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 3.16, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c4path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [-246.0, 1522.0], [-88.3, 1428.3], [69.5, 1334.6], [232.0, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.09, 0.09], [0, 0.18, 0.18], [0, 0.28, 0.27], 
+                    [0, 0.37, 0.36], [0, 0.46, 0.45], [0, 0.55, 0.55], [0, 0.64, 0.64], 
+                    [0, 0.73, 0.73], [0, 0.82, 0.82], [0, 0.91, 0.91], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.57, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c3path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [181.0, 1478.0], [175.9, 1398.8], [170.8, 1319.6], [165.5, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.25, 0.25], [0, 0.50, 0.50], [0, 0.75, 0.75], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 0.63, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c2path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [182.0, 1435.0], [154.6, 1370.0], [127.2, 1305.0], [99.0, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.25, 0.25], [0, 0.50, 0.50], [0, 0.75, 0.75], 
+                    [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.53, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function nbr1c1path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [524.0, 1496.0], [362.0, 1410.9], [199.9, 1325.7], [33.0, 1238.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.09, 0.09], [0, 0.18, 0.18], [0, 0.28, 0.27], 
+                    [0, 0.37, 0.36], [0, 0.46, 0.45], [0, 0.55, 0.55], [0, 0.64, 0.64], 
+                    [0, 0.73, 0.73], [0, 0.82, 0.82], [0, 0.91, 0.91], [0, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(1.00, 4.07, 1, false, 1, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function init() {
+
+      // Set main canvas and context references
+      canvas = document.getElementById("canvas");
+      ctx = canvas.getContext("2d");
+
+      // Initialize animations
+      filmstriprightborderstart.alphaClock = new clock(0.01, 0.04, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripleftborderstart.alphaClock = new clock(0.01, 0.04, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripstart1.alphaClock = new clock(0.01, 0.40, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstriprightborderstart2.alphaClock = new clock(0.01, 2.80, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripleftborderstart2.alphaClock = new clock(0.01, 2.80, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripstart2.alphaClock = new clock(0.01, 2.80, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstriprightborderstart3.alphaClock = new clock(0.01, 3.86, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripleftborderstart3.alphaClock = new clock(0.01, 3.86, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripstart3.alphaClock = new clock(0.01, 3.86, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstriprightborderanim.alphaClock = new clock(0.01, 4.40, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripleftborderanim.alphaClock = new clock(0.01, 4.40, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripAnim.alphaClock = new clock(0.01, 4.40, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      filmstripNoise6.alphaClock = new clock(0.10, 4.50, 1, false, 100, linear, 1.0, 1.00, 0.0000);
+      filmstripNoise5.alphaClock = new clock(0.20, 4.60, 1, false, 100, linear, 1.0, 1.00, 0.0000);
+      filmstripNoise4.alphaClock = new clock(0.30, 4.80, 1, false, 100, linear, 1.0, 1.00, 0.0000);
+      filmstripNoise3.alphaClock = new clock(0.40, 5.10, 1, false, 100, linear, 1.0, 1.00, 0.0000);
+      filmstripNoise2.alphaClock = new clock(0.50, 5.50, 1, false, 100, linear, 1.0, 1.00, 0.0000);
+      filmstripNoise1.alphaClock = new clock(0.60, 6.00, 1, false, 100, linear, 1.0, 1.00, 0.0000);
+      nbr6c16.scaleClock = new clock(1.40, 0.65, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr6c16.alphaClock = new clock(0.01, 0.65, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr6c16s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c16.scaleClock = new clock(1.40, 0.71, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c16.alphaClock = new clock(0.01, 0.71, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c16s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c15.scaleClock = new clock(1.40, 4.00, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c15.alphaClock = new clock(0.01, 4.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c15s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c14.scaleClock = new clock(1.40, 2.43, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c14.alphaClock = new clock(0.01, 2.43, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c14s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c13.scaleClock = new clock(1.40, 4.79, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c13.alphaClock = new clock(0.01, 4.79, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c13s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c12.scaleClock = new clock(1.40, 4.85, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c12.alphaClock = new clock(0.01, 4.85, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c12s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c11.scaleClock = new clock(1.40, 0.79, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c11.alphaClock = new clock(0.01, 0.79, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c11s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c10.scaleClock = new clock(1.40, 4.82, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c10.alphaClock = new clock(0.01, 4.82, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c10s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c9.scaleClock = new clock(1.40, 4.79, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c9.alphaClock = new clock(0.01, 4.79, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c9s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c8.scaleClock = new clock(1.40, 2.73, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c8.alphaClock = new clock(0.01, 2.73, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c8s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c7.scaleClock = new clock(1.40, 1.39, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c7.alphaClock = new clock(0.01, 1.39, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c7s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c6.scaleClock = new clock(1.40, 0.49, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c6.alphaClock = new clock(0.01, 0.49, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c6s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c5.scaleClock = new clock(1.40, 3.16, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c5.alphaClock = new clock(0.01, 3.16, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c5s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c4.scaleClock = new clock(1.40, 4.57, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c4.alphaClock = new clock(0.01, 4.57, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c4s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c3.scaleClock = new clock(1.40, 0.63, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c3.alphaClock = new clock(0.01, 0.63, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c3s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c2.scaleClock = new clock(1.40, 4.53, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c2.alphaClock = new clock(0.01, 4.53, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c2s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c1.scaleClock = new clock(1.40, 4.07, -1, false, 1, linear, 1.0, 1.00, 0.0001);
+      nbr1c1.alphaClock = new clock(0.01, 4.07, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+      nbr1c1s.alphaClock = new clock(0.01, 0.00, 1, false, 1, linear, 1.0, 1.00, 0.0000);
+
+      // Configure animation triggers
+      animations[29].pathClock.iterated.subscribe(function() { filmstriprightborderstart.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripleftborderstart.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripstart1.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstriprightborderstart2.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripleftborderstart2.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripstart2.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstriprightborderstart3.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripleftborderstart3.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripstart3.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstriprightborderanim.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripleftborderanim.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripAnim.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripNoise6.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripNoise5.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripNoise4.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripNoise3.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripNoise2.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { filmstripNoise1.alphaClock.start(); });
+      animations[22].pathClock.iterated.subscribe(function() { nbr6c16s.alphaClock.start(); });
+      animations[23].pathClock.iterated.subscribe(function() { nbr1c16s.alphaClock.start(); });
+      animations[24].pathClock.iterated.subscribe(function() { nbr1c15s.alphaClock.start(); });
+      animations[25].pathClock.iterated.subscribe(function() { nbr1c14s.alphaClock.start(); });
+      animations[26].pathClock.iterated.subscribe(function() { nbr1c13s.alphaClock.start(); });
+      animations[27].pathClock.iterated.subscribe(function() { nbr1c12s.alphaClock.start(); });
+      animations[28].pathClock.iterated.subscribe(function() { nbr1c11s.alphaClock.start(); });
+      animations[29].pathClock.iterated.subscribe(function() { nbr1c10s.alphaClock.start(); });
+      animations[30].pathClock.iterated.subscribe(function() { nbr1c9s.alphaClock.start(); });
+      animations[31].pathClock.iterated.subscribe(function() { nbr1c8s.alphaClock.start(); });
+      animations[32].pathClock.iterated.subscribe(function() { nbr1c7s.alphaClock.start(); });
+      animations[33].pathClock.iterated.subscribe(function() { nbr1c6s.alphaClock.start(); });
+      animations[34].pathClock.iterated.subscribe(function() { nbr1c5s.alphaClock.start(); });
+      animations[35].pathClock.iterated.subscribe(function() { nbr1c4s.alphaClock.start(); });
+      animations[36].pathClock.iterated.subscribe(function() { nbr1c3s.alphaClock.start(); });
+      animations[37].pathClock.iterated.subscribe(function() { nbr1c2s.alphaClock.start(); });
+      animations[38].pathClock.iterated.subscribe(function() { nbr1c1s.alphaClock.start(); });
+
+      // Start animation clocks
+      animations[0].pathClock.start();
+      animations[1].pathClock.start();
+      animations[2].pathClock.start();
+      animations[3].pathClock.start();
+      animations[4].pathClock.start();
+      animations[5].pathClock.start();
+      animations[6].pathClock.start();
+      animations[7].pathClock.start();
+      animations[8].pathClock.start();
+      animations[9].pathClock.start();
+      animations[10].pathClock.start();
+      animations[11].pathClock.start();
+      animations[12].pathClock.start();
+      animations[13].pathClock.start();
+      animations[14].pathClock.start();
+      animations[15].pathClock.start();
+      animations[16].pathClock.start();
+      animations[17].pathClock.start();
+      animations[18].pathClock.start();
+      animations[19].pathClock.start();
+      animations[20].pathClock.start();
+      animations[21].pathClock.start();
+      animations[22].pathClock.start();
+      nbr6c16.scaleClock.start();
+      nbr6c16.alphaClock.start();
+      animations[23].pathClock.start();
+      nbr1c16.scaleClock.start();
+      nbr1c16.alphaClock.start();
+      animations[24].pathClock.start();
+      nbr1c15.scaleClock.start();
+      nbr1c15.alphaClock.start();
+      animations[25].pathClock.start();
+      nbr1c14.scaleClock.start();
+      nbr1c14.alphaClock.start();
+      animations[26].pathClock.start();
+      nbr1c13.scaleClock.start();
+      nbr1c13.alphaClock.start();
+      animations[27].pathClock.start();
+      nbr1c12.scaleClock.start();
+      nbr1c12.alphaClock.start();
+      animations[28].pathClock.start();
+      nbr1c11.scaleClock.start();
+      nbr1c11.alphaClock.start();
+      animations[29].pathClock.start();
+      nbr1c10.scaleClock.start();
+      nbr1c10.alphaClock.start();
+      animations[30].pathClock.start();
+      nbr1c9.scaleClock.start();
+      nbr1c9.alphaClock.start();
+      animations[31].pathClock.start();
+      nbr1c8.scaleClock.start();
+      nbr1c8.alphaClock.start();
+      animations[32].pathClock.start();
+      nbr1c7.scaleClock.start();
+      nbr1c7.alphaClock.start();
+      animations[33].pathClock.start();
+      nbr1c6.scaleClock.start();
+      nbr1c6.alphaClock.start();
+      animations[34].pathClock.start();
+      nbr1c5.scaleClock.start();
+      nbr1c5.alphaClock.start();
+      animations[35].pathClock.start();
+      nbr1c4.scaleClock.start();
+      nbr1c4.alphaClock.start();
+      animations[36].pathClock.start();
+      nbr1c3.scaleClock.start();
+      nbr1c3.alphaClock.start();
+      animations[37].pathClock.start();
+      nbr1c2.scaleClock.start();
+      nbr1c2.alphaClock.start();
+      animations[38].pathClock.start();
+      nbr1c1.scaleClock.start();
+      nbr1c1.alphaClock.start();
+
+      // Set animation timer
+      setInterval(drawFrame, (1000 / fps));
+    }
+
+    function updateAnimations() {
+
+      // Update animation clocks
+      updateAllClocks();
+
+      // Update animation paths  
+      var animationCount = animations.length;
+      for (var i = 0; i < animationCount; i++) {
+        animations[i].update();
+      }
+    }
+
+    function drawFrame() {
+
+      // Update animations
+      updateAnimations();
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      background(ctx);
+
+      ctx.save();
+      ctx.translate(animations[0].x, animations[0].y);
+      rR34(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[1].x, animations[1].y);
+      lR34(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[2].x, animations[2].y);
+      rR16(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[3].x, animations[3].y);
+      lR16(ctx);
+      ctx.restore();
+
+      if (filmstripstart1_show) {
+          ctx.save();
+          ctx.translate(animations[4].x, animations[4].y);
+          ctx.globalAlpha = filmstriprightborderstart.alphaClock.value;
+          filmstriprightborderstart(ctx);
+          ctx.restore();
+
+          ctx.save();
+          ctx.translate(animations[5].x, animations[5].y);
+          ctx.globalAlpha = filmstripleftborderstart.alphaClock.value;
+          filmstripleftborderstart(ctx);
+          ctx.restore();
+
+
+          ctx.save();
+          ctx.translate(animations[6].x, animations[6].y);
+          ctx.globalAlpha = filmstripstart1.alphaClock.value;
+          filmstripstart1(ctx);
+          ctx.restore();
+      }
+      if (animations[6].y == 759) {
+          filmstripstart1_show = false;
+
+      }
+
+
+      if (filmstripstart2_show) {
+          ctx.save();
+          ctx.translate(animations[7].x, animations[7].y);
+          ctx.globalAlpha = filmstriprightborderstart2.alphaClock.value;
+          filmstriprightborderstart2(ctx);
+          ctx.restore();
+
+          ctx.save();
+          ctx.translate(animations[8].x, animations[8].y);
+          ctx.globalAlpha = filmstripleftborderstart2.alphaClock.value;
+          filmstripleftborderstart2(ctx);
+          ctx.restore();
+
+          ctx.save();
+          ctx.translate(animations[9].x, animations[9].y);
+          ctx.globalAlpha = filmstripstart2.alphaClock.value;
+          filmstripstart2(ctx);
+          ctx.restore();
+      }
+      if (animations[9].y == 1159) {
+          filmstripstart2_show = false;
+
+      }
+
+
+      if (filmstripstart3_show) {
+          ctx.save();
+          ctx.translate(animations[10].x, animations[10].y);
+          ctx.globalAlpha = filmstriprightborderstart3.alphaClock.value;
+          filmstriprightborderstart2(ctx);
+          ctx.restore();
+
+          ctx.save();
+          ctx.translate(animations[11].x, animations[11].y);
+          ctx.globalAlpha = filmstripleftborderstart3.alphaClock.value;
+          filmstripleftborderstart3(ctx);
+          ctx.restore();
+
+          ctx.save();
+          ctx.translate(animations[12].x, animations[12].y);
+          ctx.globalAlpha = filmstripstart3.alphaClock.value;
+          filmstripstart3(ctx);
+          ctx.restore();
+      }
+      if (animations[12].y == 759) {
+          filmstripstart3_show = false;
+
+      }
+
+      ctx.save();
+      ctx.translate(animations[13].x, animations[13].y);
+      ctx.globalAlpha = filmstriprightborderanim.alphaClock.value;
+      filmstriprightborderanim(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[14].x, animations[14].y);
+      ctx.globalAlpha = filmstripleftborderanim.alphaClock.value;
+      filmstripleftborderanim(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[15].x, animations[15].y);
+      ctx.globalAlpha = filmstripAnim.alphaClock.value;
+      filmstripAnim(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(510.5, 773.0);
+      ctx.globalAlpha = filmstripNoise6.alphaClock.value;
+      filmstripNoise6(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(509.5, 773.0);
+      ctx.globalAlpha = filmstripNoise5.alphaClock.value;
+      filmstripNoise5(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(510.5, 773.0);
+      ctx.globalAlpha = filmstripNoise4.alphaClock.value;
+      filmstripNoise4(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(510.5, 773.0);
+      ctx.globalAlpha = filmstripNoise3.alphaClock.value;
+      filmstripNoise3(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(510.5, 773.0);
+      ctx.globalAlpha = filmstripNoise2.alphaClock.value;
+      filmstripNoise2(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(510.5, 773.0);
+      ctx.globalAlpha = filmstripNoise1.alphaClock.value;
+      filmstripNoise1(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[16].x, animations[16].y);
+      rR54(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[17].x, animations[17].y);
+      lR54(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[18].x, animations[18].y);
+      rR53(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[19].x, animations[19].y);
+      lR53(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[20].x, animations[20].y);
+      rR52(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[21].x, animations[21].y);
+      lR52(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[22].x, animations[22].y);
+      ctx.scale(nbr6c16.scaleClock.value, nbr6c16.scaleClock.value);
+      ctx.globalAlpha = nbr6c16.alphaClock.value;
+      nbr6c16(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(990.0, 1353.5);
+      ctx.globalAlpha = nbr6c16s.alphaClock.value;
+      nbr6c16s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[23].x, animations[23].y);
+      ctx.scale(nbr1c16.scaleClock.value, nbr1c16.scaleClock.value);
+      ctx.globalAlpha = nbr1c16.alphaClock.value;
+      nbr1c16(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(1007.5, 1238.0);
+      ctx.globalAlpha = nbr1c16s.alphaClock.value;
+      nbr1c16s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[24].x, animations[24].y);
+      ctx.scale(nbr1c15.scaleClock.value, nbr1c15.scaleClock.value);
+      ctx.globalAlpha = nbr1c15.alphaClock.value;
+      nbr1c15(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(957.5, 1238.0);
+      ctx.globalAlpha = nbr1c15s.alphaClock.value;
+      nbr1c15s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[25].x, animations[25].y);
+      ctx.scale(nbr1c14.scaleClock.value, nbr1c14.scaleClock.value);
+      ctx.globalAlpha = nbr1c14.alphaClock.value;
+      nbr1c14(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(890.5, 1238.0);
+      ctx.globalAlpha = nbr1c14s.alphaClock.value;
+      nbr1c14s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[26].x, animations[26].y);
+      ctx.scale(nbr1c13.scaleClock.value, nbr1c13.scaleClock.value);
+      ctx.globalAlpha = nbr1c13.alphaClock.value;
+      nbr1c13(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(824.5, 1238.0);
+      ctx.globalAlpha = nbr1c13s.alphaClock.value;
+      nbr1c13s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[27].x, animations[27].y);
+      ctx.scale(nbr1c12.scaleClock.value, nbr1c12.scaleClock.value);
+      ctx.globalAlpha = nbr1c12.alphaClock.value;
+      nbr1c12(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(759.5, 1238.0);
+      ctx.globalAlpha = nbr1c12s.alphaClock.value;
+      nbr1c12s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[28].x, animations[28].y);
+      ctx.scale(nbr1c11.scaleClock.value, nbr1c11.scaleClock.value);
+      ctx.globalAlpha = nbr1c11.alphaClock.value;
+      nbr1c11(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(693.5, 1238.0);
+      ctx.globalAlpha = nbr1c11s.alphaClock.value;
+      nbr1c11s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[29].x, animations[29].y);
+      ctx.scale(nbr1c10.scaleClock.value, nbr1c10.scaleClock.value);
+      ctx.globalAlpha = nbr1c10.alphaClock.value;
+      nbr1c10(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(627.0, 1238.0);
+      ctx.globalAlpha = nbr1c10s.alphaClock.value;
+      nbr1c10s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[30].x, animations[30].y);
+      ctx.scale(nbr1c9.scaleClock.value, nbr1c9.scaleClock.value);
+      ctx.globalAlpha = nbr1c9.alphaClock.value;
+      nbr1c9(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(560.5, 1238.0);
+      ctx.globalAlpha = nbr1c9s.alphaClock.value;
+      nbr1c9s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[31].x, animations[31].y);
+      ctx.scale(nbr1c8.scaleClock.value, nbr1c8.scaleClock.value);
+      ctx.globalAlpha = nbr1c8.alphaClock.value;
+      nbr1c8(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(494.5, 1238.0);
+      ctx.globalAlpha = nbr1c8s.alphaClock.value;
+      nbr1c8s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[32].x, animations[32].y);
+      ctx.scale(nbr1c7.scaleClock.value, nbr1c7.scaleClock.value);
+      ctx.globalAlpha = nbr1c7.alphaClock.value;
+      nbr1c7(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(430.0, 1238.0);
+      ctx.globalAlpha = nbr1c7s.alphaClock.value;
+      nbr1c7s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[33].x, animations[33].y);
+      ctx.scale(nbr1c6.scaleClock.value, nbr1c6.scaleClock.value);
+      ctx.globalAlpha = nbr1c6.alphaClock.value;
+      nbr1c6(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(365.0, 1238.0);
+      ctx.globalAlpha = nbr1c6s.alphaClock.value;
+      nbr1c6s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[34].x, animations[34].y);
+      ctx.scale(nbr1c5.scaleClock.value, nbr1c5.scaleClock.value);
+      ctx.globalAlpha = nbr1c5.alphaClock.value;
+      nbr1c5(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(298.5, 1238.0);
+      ctx.globalAlpha = nbr1c5s.alphaClock.value;
+      nbr1c5s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[35].x, animations[35].y);
+      ctx.scale(nbr1c4.scaleClock.value, nbr1c4.scaleClock.value);
+      ctx.globalAlpha = nbr1c4.alphaClock.value;
+      nbr1c4(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(232.0, 1238.0);
+      ctx.globalAlpha = nbr1c4s.alphaClock.value;
+      nbr1c4s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[36].x, animations[36].y);
+      ctx.scale(nbr1c3.scaleClock.value, nbr1c3.scaleClock.value);
+      ctx.globalAlpha = nbr1c3.alphaClock.value;
+      nbr1c3(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(165.5, 1238.0);
+      ctx.globalAlpha = nbr1c3s.alphaClock.value;
+      nbr1c3s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[37].x, animations[37].y);
+      ctx.scale(nbr1c2.scaleClock.value, nbr1c2.scaleClock.value);
+      ctx.globalAlpha = nbr1c2.alphaClock.value;
+      nbr1c2(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(99.0, 1238.0);
+      ctx.globalAlpha = nbr1c2s.alphaClock.value;
+      nbr1c2s(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[38].x, animations[38].y);
+      ctx.scale(nbr1c1.scaleClock.value, nbr1c1.scaleClock.value);
+      ctx.globalAlpha = nbr1c1.alphaClock.value;
+      nbr1c1(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(33.0, 1238.0);
+      ctx.globalAlpha = nbr1c1s.alphaClock.value;
+      nbr1c1s(ctx);
+      ctx.restore();
+
+      draw(ctx);
+
+      placeholder1(ctx);
+    }
+
+    function background(ctx) {
+
+      // background/Path
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(0.0, 0.0);
+      ctx.lineTo(1024.0, 0.0);
+      ctx.lineTo(1024.0, 1366.0);
+      ctx.lineTo(0.0, 1366.0);
+      ctx.lineTo(0.0, 0.0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function rR34(ctx) {
+
+      // rR34
+      ctx.drawImage(document.getElementById("image1"), -250.0, -12.0);
+    }
+
+    function lR34(ctx) {
+
+      // lR34
+      ctx.drawImage(document.getElementById("image2"), -263.0, -12.0);
+    }
+
+    function rR16(ctx) {
+
+      // rR16
+      ctx.drawImage(document.getElementById("image3"), -250.0, -12.0);
+    }
+
+    function lR16(ctx) {
+
+      // lR16
+      ctx.drawImage(document.getElementById("image4"), -263.0, -12.0);
+    }
+
+    function filmstriprightborderstart(ctx) {
+
+      // filmstriprightborderstart
+      ctx.drawImage(document.getElementById("image5"), -48.0, -414.5);
+    }
+
+    function filmstripleftborderstart(ctx) {
+
+      // filmstripleftborderstart
+      ctx.drawImage(document.getElementById("image6"), -48.5, -414.5);
+    }
+
+    function filmstripstart1(ctx) {
+
+      // filmstripstart1
+      ctx.drawImage(document.getElementById("image7"), -360.0, -414.5);
+    }
+
+    function filmstriprightborderstart2(ctx) {
+
+      // filmstriprightborderstart2
+      ctx.drawImage(document.getElementById("image8"), -48.0, -414.0);
+    }
+
+    function filmstripleftborderstart2(ctx) {
+
+      // filmstripleftborderstart2
+      ctx.drawImage(document.getElementById("image9"), -48.5, -414.0);
+    }
+
+    function filmstripstart2(ctx) {
+
+      // filmstripstart2
+      ctx.drawImage(document.getElementById("image10"), -360.0, -414.5);
+    }
+
+    function filmstriprightborderstart3(ctx) {
+
+      // filmstriprightborderstart3
+      ctx.drawImage(document.getElementById("image11"), -48.0, -414.0);
+    }
+
+    function filmstripleftborderstart3(ctx) {
+
+      // filmstripleftborderstart3
+      ctx.drawImage(document.getElementById("image12"), -48.5, -414.0);
+    }
+
+    function filmstripstart3(ctx) {
+
+      // filmstripstart3
+      ctx.drawImage(document.getElementById("image13"), -360.0, -414.0);
+    }
+
+    function filmstriprightborderanim(ctx) {
+
+      // filmstriprightborderanim
+      ctx.drawImage(document.getElementById("image14"), -48.0, -1245.0);
+    }
+
+    function filmstripleftborderanim(ctx) {
+
+      // filmstripleftborderanim
+      ctx.drawImage(document.getElementById("image15"), -48.5, -1245.0);
+    }
+
+    function filmstripAnim(ctx) {
+
+      // filmstripAnim
+      ctx.drawImage(document.getElementById("image16"), -360.5, -828.0);
+    }
+
+    function filmstripNoise6(ctx) {
+
+      // filmstripNoise6
+      ctx.drawImage(document.getElementById("image17"), -344.5, -368.0);
+    }
+
+    function filmstripNoise5(ctx) {
+
+      // filmstripNoise5
+      ctx.drawImage(document.getElementById("image18"), -344.5, -368.0);
+    }
+
+    function filmstripNoise4(ctx) {
+
+      // filmstripNoise4
+      ctx.drawImage(document.getElementById("image19"), -344.5, -368.0);
+    }
+
+    function filmstripNoise3(ctx) {
+
+      // filmstripNoise3
+      ctx.drawImage(document.getElementById("image20"), -344.5, -368.0);
+    }
+
+    function filmstripNoise2(ctx) {
+
+      // filmstripNoise2
+      ctx.drawImage(document.getElementById("image21"), -344.5, -368.0);
+    }
+
+    function filmstripNoise1(ctx) {
+
+      // filmstripNoise1
+      ctx.drawImage(document.getElementById("image22"), -344.5, -368.0);
+    }
+
+    function rR54(ctx) {
+
+      // rR54
+      ctx.drawImage(document.getElementById("image23"), -250.5, -5.0);
+    }
+
+    function lR54(ctx) {
+
+      // lR54
+      ctx.drawImage(document.getElementById("image24"), -263.5, -5.0);
+    }
+
+    function rR53(ctx) {
+
+      // rR53
+      ctx.drawImage(document.getElementById("image25"), -262.5, -12.0);
+    }
+
+    function lR53(ctx) {
+
+      // lR53
+      ctx.drawImage(document.getElementById("image26"), -249.5, -12.0);
+    }
+
+    function rR52(ctx) {
+
+      // rR52
+      ctx.drawImage(document.getElementById("image27"), -250.0, -12.0);
+    }
+
+    function lR52(ctx) {
+
+      // lR52
+      ctx.drawImage(document.getElementById("image28"), -263.0, -12.0);
+    }
+
+    function nbr6c16(ctx) {
+
+      // nbr6c16
+      ctx.drawImage(document.getElementById("image29"), -136.0, -48.0);
+    }
+
+    function nbr6c16s(ctx) {
+
+      // nbr6c16s
+      ctx.drawImage(document.getElementById("image30"), -34.0, -13.0);
+    }
+
+    function nbr1c16(ctx) {
+
+      // nbr1c16
+      ctx.drawImage(document.getElementById("image31"), -66.0, -44.0);
+    }
+
+    function nbr1c16s(ctx) {
+
+      // nbr1c16s
+      ctx.drawImage(document.getElementById("image32"), -16.5, -11.0);
+    }
+
+    function nbr1c15(ctx) {
+
+      // nbr1c15
+      ctx.drawImage(document.getElementById("image33"), -134.0, -44.0);
+    }
+
+    function nbr1c15s(ctx) {
+
+      // nbr1c15s
+      ctx.drawImage(document.getElementById("image34"), -33.5, -11.0);
+    }
+
+    function nbr1c14(ctx) {
+
+      // nbr1c14
+      ctx.drawImage(document.getElementById("image35"), -134.0, -44.0);
+    }
+
+    function nbr1c14s(ctx) {
+
+      // nbr1c14s
+      ctx.drawImage(document.getElementById("image36"), -33.5, -11.0);
+    }
+
+    function nbr1c13(ctx) {
+
+      // nbr1c13
+      ctx.drawImage(document.getElementById("image37"), -130.0, -44.0);
+    }
+
+    function nbr1c13s(ctx) {
+
+      // nbr1c13s
+      ctx.drawImage(document.getElementById("image38"), -32.5, -11.0);
+    }
+
+    function nbr1c12(ctx) {
+
+      // nbr1c12
+      ctx.drawImage(document.getElementById("image39"), -130.0, -44.0);
+    }
+
+    function nbr1c12s(ctx) {
+
+      // nbr1c12s
+      ctx.drawImage(document.getElementById("image40"), -32.5, -11.0);
+    }
+
+    function nbr1c11(ctx) {
+
+      // nbr1c11
+      ctx.drawImage(document.getElementById("image41"), -134.0, -44.0);
+    }
+
+    function nbr1c11s(ctx) {
+
+      // nbr1c11s
+      ctx.drawImage(document.getElementById("image42"), -33.5, -11.0);
+    }
+
+    function nbr1c10(ctx) {
+
+      // nbr1c10
+      ctx.drawImage(document.getElementById("image43"), -132.0, -44.0);
+    }
+
+    function nbr1c10s(ctx) {
+
+      // nbr1c10s
+      ctx.drawImage(document.getElementById("image44"), -33.0, -11.0);
+    }
+
+    function nbr1c9(ctx) {
+
+      // nbr1c9
+      ctx.drawImage(document.getElementById("image45"), -134.0, -44.0);
+    }
+
+    function nbr1c9s(ctx) {
+
+      // nbr1c9s
+      ctx.drawImage(document.getElementById("image46"), -33.5, -11.0);
+    }
+
+    function nbr1c8(ctx) {
+
+      // nbr1c8
+      ctx.drawImage(document.getElementById("image47"), -130.0, -44.0);
+    }
+
+    function nbr1c8s(ctx) {
+
+      // nbr1c8s
+      ctx.drawImage(document.getElementById("image48"), -32.5, -11.0);
+    }
+
+    function nbr1c7(ctx) {
+
+      // nbr1c7
+      ctx.drawImage(document.getElementById("image49"), -132.0, -44.0);
+    }
+
+    function nbr1c7s(ctx) {
+
+      // nbr1c7s
+      ctx.drawImage(document.getElementById("image50"), -32.0, -11.0);
+    }
+
+    function nbr1c6(ctx) {
+
+      // nbr1c6
+      ctx.drawImage(document.getElementById("image51"), -137.0, -52.0);
+    }
+
+    function nbr1c6s(ctx) {
+
+      // nbr1c6s
+      ctx.drawImage(document.getElementById("image52"), -33.0, -11.0);
+    }
+
+    function nbr1c5(ctx) {
+
+      // nbr1c5
+      ctx.drawImage(document.getElementById("image53"), -139.0, -52.0);
+    }
+
+    function nbr1c5s(ctx) {
+
+      // nbr1c5s
+      ctx.drawImage(document.getElementById("image54"), -33.5, -11.0);
+    }
+
+    function nbr1c4(ctx) {
+
+      // nbr1c4
+      ctx.drawImage(document.getElementById("image55"), -139.0, -54.0);
+    }
+
+    function nbr1c4s(ctx) {
+
+      // nbr1c4s
+      ctx.drawImage(document.getElementById("image56"), -33.0, -11.0);
+    }
+
+    function nbr1c3(ctx) {
+
+      // nbr1c3
+      ctx.drawImage(document.getElementById("image57"), -141.0, -54.5);
+    }
+
+    function nbr1c3s(ctx) {
+
+      // nbr1c3s
+      ctx.drawImage(document.getElementById("image58"), -33.5, -11.0);
+    }
+
+    function nbr1c2(ctx) {
+
+      // nbr1c2
+      ctx.drawImage(document.getElementById("image59"), -139.0, -54.0);
+    }
+
+    function nbr1c2s(ctx) {
+
+      // nbr1c2s
+      ctx.drawImage(document.getElementById("image60"), -33.0, -11.0);
+    }
+
+    function nbr1c1(ctx) {
+
+      // nbr1c1
+      ctx.drawImage(document.getElementById("image61"), -139.0, -56.5);
+    }
+
+    function nbr1c1s(ctx) {
+
+      // nbr1c1s
+      ctx.drawImage(document.getElementById("image62"), -33.0, -11.0);
+    }
+
+    function draw(ctx) {
+
+      var alpha = ctx.globalAlpha;
+
+      // filmstripPart2/Linked File
+      // This artwork uses an unsupported "Multiply" blending mode
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.85;
+      ctx.save();
+      ctx.transform(0.800, 0.000, -0.000, 0.800, 655.6, 928.2);
+      ctx.drawImage(document.getElementById("image63"), -72.0, -59.0);
+      ctx.restore();
+
+      // filmstripPart2/Linked File
+      // This artwork uses an unsupported "Multiply" blending mode
+      ctx.save();
+      ctx.transform(0.800, 0.000, -0.000, 0.800, 585.4, 838.0);
+      ctx.drawImage(document.getElementById("image64"), -70.5, -70.0);
+      ctx.restore();
+
+      // filmstripPart2/Linked File
+      // This artwork uses an unsupported "Multiply" blending mode
+      ctx.save();
+      ctx.transform(0.800, 0.000, -0.000, 0.800, 486.8, 731.0);
+      ctx.drawImage(document.getElementById("image65"), -46.0, -60.0);
+      ctx.restore();
+
+      // filmstripPart2/Linked File
+      // This artwork uses an unsupported "Multiply" blending mode
+      ctx.save();
+      ctx.transform(0.800, 0.000, -0.000, 0.800, 409.2, 650.6);
+      ctx.drawImage(document.getElementById("image66"), -46.5, -52.0);
+      ctx.restore();
+
+      // filmstripPart2/Linked File
+      // This artwork uses an unsupported "Multiply" blending mode
+      ctx.save();
+      ctx.transform(0.800, 0.000, -0.000, 0.800, 332.2, 556.6);
+      ctx.drawImage(document.getElementById("image67"), -51.5, -62.0);
+      ctx.restore();
+
+      // filmstripPart2/Linked File
+      // This artwork uses an unsupported "Multiply" blending mode
+      ctx.save();
+      ctx.transform(1.000, 0.000, -0.000, 1.000, 235.5, 468.0);
+      ctx.drawImage(document.getElementById("image68"), -41.5, -62.0);
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function placeholder1(ctx) {
+
+      // placeholder1
+      ctx.drawImage(document.getElementById("image69"), 0.0, -0.0);
+    }
+  </script>
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="1024" height="1366"></canvas>
+   <img alt="RR34" id="image1" style="display: none" src="rr34.png" />
+   <img alt="LR34" id="image2" style="display: none" src="lr34.png" />
+   <img alt="RR16" id="image3" style="display: none" src="rr16.png" />
+   <img alt="LR16" id="image4" style="display: none" src="lr16.png" />
+   <img alt="Filmstriprightborderstart" id="image5" style="display: none" src="Filmstrip-right-border-start.png" />
+   <img alt="Filmstripleftborderstart" id="image6" style="display: none" src="Filmstrip-left-border-start.png" />
+   <img alt="Filmstripstart1" id="image7" style="display: none" src="Filmstripstart1.png" />
+   <img alt="Filmstriprightborderstart2" id="image8" style="display: none" src="Filmstrip-right-border-start2.png" />
+   <img alt="Filmstripleftborderstart2" id="image9" style="display: none" src="Filmstrip-left-border-start2.png" />
+   <img alt="Filmstripstart2" id="image10" style="display: none" src="Filmstripstart2.png" />
+   <img alt="Filmstriprightborderstart3" id="image11" style="display: none" src="Filmstrip-right-border-start3.png" />
+   <img alt="Filmstripleftborderstart3" id="image12" style="display: none" src="Filmstrip-left-border-start3.png" />
+   <img alt="Filmstripstart3" id="image13" style="display: none" src="Filmstripstart3.png" />
+   <img alt="Filmstriprightborderanim" id="image14" style="display: none" src="Filmstrip-right-border-anim.png" />
+   <img alt="Filmstripleftborderanim" id="image15" style="display: none" src="Filmstrip-left-border-anim.png" />
+   <img alt="FilmstripAnim" id="image16" style="display: none" src="Filmstrip-anim.png" />
+   <img alt="Filmstrip Noise 6" id="image17" style="display: none" src="Filmstrip-noise6.png" />
+   <img alt="Filmstrip Noise 5" id="image18" style="display: none" src="Filmstrip-noise5.png" />
+   <img alt="Filmstrip Noise 4" id="image19" style="display: none" src="Filmstrip-noise4.png" />
+   <img alt="Filmstrip Noise 3" id="image20" style="display: none" src="Filmstrip-noise3.png" />
+   <img alt="Filmstrip Noise 2" id="image21" style="display: none" src="Filmstrip-noise2.png" />
+   <img alt="Filmstrip Noise 1" id="image22" style="display: none" src="Filmstrip-noise1.png" />
+   <img alt="RR54" id="image23" style="display: none" src="rr54.png" />
+   <img alt="LR54" id="image24" style="display: none" src="lr54.png" />
+   <img alt="RR53" id="image25" style="display: none" src="rr53.png" />
+   <img alt="LR53" id="image26" style="display: none" src="lr53.png" />
+   <img alt="RR52" id="image27" style="display: none" src="rr52.png" />
+   <img alt="LR52" id="image28" style="display: none" src="lr52.png" />
+   <img alt="nbr6c16" id="image29" style="display: none" src="nbr6c16.png" />
+   <img alt="nbr6c16s" id="image30" style="display: none" src="nbr6c16s.png" />
+   <img alt="nbr1c16" id="image31" style="display: none" src="nbr1c16.png" />
+   <img alt="nbr1c16s" id="image32" style="display: none" src="nbr1c16s.png" />
+   <img alt="nbr1c15" id="image33" style="display: none" src="nbr1c15.png" />
+   <img alt="nbr1c15s" id="image34" style="display: none" src="nbr1c15s.png" />
+   <img alt="nbr1c14" id="image35" style="display: none" src="nbr1c14.png" />
+   <img alt="nbr1c14s" id="image36" style="display: none" src="nbr1c14s.png" />
+   <img alt="nbr1c13" id="image37" style="display: none" src="nbr1c13.png" />
+   <img alt="nbr1c13s" id="image38" style="display: none" src="nbr1c13s.png" />
+   <img alt="nbr1c12" id="image39" style="display: none" src="nbr1c12.png" />
+   <img alt="nbr1c12s" id="image40" style="display: none" src="nbr1c12s.png" />
+   <img alt="nbr1c11" id="image41" style="display: none" src="nbr1c11.png" />
+   <img alt="nbr1c11s" id="image42" style="display: none" src="nbr1c11s.png" />
+   <img alt="nbr1c10" id="image43" style="display: none" src="nbr1c10.png" />
+   <img alt="nbr1c10s" id="image44" style="display: none" src="nbr1c10s.png" />
+   <img alt="nbr1c9" id="image45" style="display: none" src="nbr1c9.png" />
+   <img alt="nbr1c9s" id="image46" style="display: none" src="nbr1c9s.png" />
+   <img alt="nbr1c8" id="image47" style="display: none" src="nbr1c8.png" />
+   <img alt="nbr1c8s" id="image48" style="display: none" src="nbr1c8s.png" />
+   <img alt="nbr1c7" id="image49" style="display: none" src="nbr1c7.png" />
+   <img alt="nbr1c7s" id="image50" style="display: none" src="nbr1c7s.png" />
+   <img alt="nbr1c6" id="image51" style="display: none" src="nbr1c6.png" />
+   <img alt="nbr1c6s" id="image52" style="display: none" src="nbr1c6s.png" />
+   <img alt="nbr1c5" id="image53" style="display: none" src="nbr1c5.png" />
+   <img alt="nbr1c5s" id="image54" style="display: none" src="nbr1c5s.png" />
+   <img alt="nbr1c4" id="image55" style="display: none" src="nbr1c4.png" />
+   <img alt="nbr1c4s" id="image56" style="display: none" src="nbr1c4s.png" />
+   <img alt="nbr1c3" id="image57" style="display: none" src="nbr1c3.png" />
+   <img alt="nbr1c3s" id="image58" style="display: none" src="nbr1c3s.png" />
+   <img alt="nbr1c2" id="image59" style="display: none" src="nbr1c2.png" />
+   <img alt="nbr1c2s" id="image60" style="display: none" src="nbr1c2s.png" />
+   <img alt="nbr1c1" id="image61" style="display: none" src="nbr1c1.png" />
+   <img alt="nbr1c1s" id="image62" style="display: none" src="nbr1c1s.png" />
+   <img alt="Linked File" id="image63" style="display: none" src="file:///E:/Users/admin/Documents/Projects/Websites/callumreidy.com/originals/design/tablet/Filmstrip%20Components/Callum%20Name%20Art%20%5BLetter%20M%5D.png" />
+   <img alt="Linked File" id="image64" style="display: none" src="file:///E:/Users/admin/Documents/Projects/Websites/callumreidy.com/originals/design/tablet/Filmstrip%20Components/Callum%20Name%20Art%20%5BLetter%20U%5D.png" />
+   <img alt="Linked File" id="image65" style="display: none" src="file:///E:/Users/admin/Documents/Projects/Websites/callumreidy.com/originals/design/tablet/Filmstrip%20Components/Callum%20Name%20Art%20%5BLetter%20L2%5D.png" />
+   <img alt="Linked File" id="image66" style="display: none" src="file:///E:/Users/admin/Documents/Projects/Websites/callumreidy.com/originals/design/tablet/Filmstrip%20Components/Callum%20Name%20Art%20%5BLetter%20L1%5D.png" />
+   <img alt="Linked File" id="image67" style="display: none" src="file:///E:/Users/admin/Documents/Projects/Websites/callumreidy.com/originals/design/tablet/Filmstrip%20Components/Callum%20Name%20Art%20%5BLetter%20A%5D.png" />
+   <img alt="Linked File" id="image68" style="display: none" src="file:///E:/Users/admin/Documents/Projects/Websites/callumreidy.com/originals/design/tablet/Filmstrip%20Components/Callum%20Art%20%5BLetter%20C%5D%20(Animation%20Component).png" />
+   <img alt="Placeholder1" id="image69" style="display: none" src="placeholder1.png" />
+ </body>
+</html>
